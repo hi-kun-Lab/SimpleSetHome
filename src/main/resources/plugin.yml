@@ -1,0 +1,15 @@
+name: SimpleSetHome
+version: '${project.version}'
+main: xyz.hiziki.Main
+api-version: 1.19
+prefix: SimpleSetHome
+authors: [ hi_kun_JPN ]
+description: プレイヤーが家を設定できます。
+website: www.hiziki.xyz
+commands:
+  sethome:
+    description: set your home
+    usage: /<command>
+  home:
+    description: warp your home
+    usage: /<command>
