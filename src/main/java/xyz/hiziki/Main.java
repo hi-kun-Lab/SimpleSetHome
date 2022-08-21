@@ -21,6 +21,9 @@ public class Main extends JavaPlugin
     {
         super.onEnable();
 
+        getCommand("sethome").setExecutor(this);
+        getCommand("home").setExecutor(this);
+
         getLogger().info("プラグインは正常に起動しました。");
     }
 
@@ -81,6 +84,7 @@ public class Main extends JavaPlugin
                     float yaw = homes.getLong("Homes." + p.getUniqueId() + ".Yaw");
                     float pitch = homes.getLong("Homes." + p.getUniqueId() + ".Pitch");
                     p.teleport(new Location(world, x, y, z, yaw, pitch));
+                    p.playSound(new Location(world, x, y, z, yaw, pitch), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
                 }
             }
         }
