@@ -51,6 +51,8 @@ public class Main extends JavaPlugin
                 homes.set("Homes." + p.getUniqueId() + ".X", p.getLocation().getX());
                 homes.set("Homes." + p.getUniqueId() + ".Y", p.getLocation().getY());
                 homes.set("Homes." + p.getUniqueId() + ".Z", p.getLocation().getZ());
+                homes.set("Homes." + p.getUniqueId() + ".Yaw", p.getLocation().getYaw());
+                homes.set("Homes." + p.getUniqueId() + ".Pitch", p.getLocation().getPitch());
                 saveFile();
                 p.sendMessage("ホームを設定しました。");
             }
@@ -76,7 +78,9 @@ public class Main extends JavaPlugin
                     double x = homes.getDouble("Homes." + p.getUniqueId() + ".X");
                     double y = homes.getDouble("Homes." + p.getUniqueId() + ".Y");
                     double z = homes.getDouble("Homes." + p.getUniqueId() + ".Z");
-                    p.teleport(new Location(world, x, y, z));
+                    float yaw = homes.getLong("Homes." + p.getUniqueId() + ".Yaw");
+                    float pitch = homes.getLong("Homes." + p.getUniqueId() + ".Pitch");
+                    p.teleport(new Location(world, x, y, z, yaw, pitch));
                 }
             }
         }
