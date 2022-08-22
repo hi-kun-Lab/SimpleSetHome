@@ -15,11 +15,15 @@ public class Main extends JavaPlugin
 {
     private final File homesFile = new File(getDataFolder(), "Homes.yml");
     private final YamlConfiguration homes = YamlConfiguration.loadConfiguration(homesFile);
+    private Config config;
+
 
     @Override
     public void onEnable() //プラグインが起動した時
     {
         super.onEnable();
+
+        config = new Config(this);
 
         getCommand("sethome").setExecutor(this);
         getCommand("home").setExecutor(this);
@@ -57,7 +61,13 @@ public class Main extends JavaPlugin
                 homes.set("Homes." + p.getUniqueId() + ".Yaw", p.getLocation().getYaw());
                 homes.set("Homes." + p.getUniqueId() + ".Pitch", p.getLocation().getPitch());
                 saveFile();
-                p.sendMessage("ホームを設定しました。");
+                if (config.enable("enable-sethome-message"))
+                {
+                    if (config.message("sethome-message") != null)
+                    {
+                        p.sendMessage(config.message("sethome-message"));
+                    }
+                }
             }
             return false;
         }
@@ -71,11 +81,7 @@ public class Main extends JavaPlugin
             else
             {
                 Player p = (Player) sender;
-                if (homes.getString("Homes." + p.getUniqueId()) == null)
-                {
-                    sender.sendMessage("ホームが設定されていません");
-                }
-                else
+                if (homes.getString("Homes." + p.getUniqueId()) != null)
                 {
                     World world = Bukkit.getWorld(homes.getString("Homes." + p.getUniqueId() + ".World"));
                     double x = homes.getDouble("Homes." + p.getUniqueId() + ".X");
@@ -85,6 +91,23 @@ public class Main extends JavaPlugin
                     float pitch = homes.getLong("Homes." + p.getUniqueId() + ".Pitch");
                     p.teleport(new Location(world, x, y, z, yaw, pitch));
                     p.playSound(new Location(world, x, y, z, yaw, pitch), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
+                    if (config.enable("enable-teleport-message"))
+                    {
+                        if (config.message("teleport-message") != null)
+                        {
+                            p.sendMessage(config.message("teleport-message"));
+                        }
+                    }
+                }
+                else
+                {
+                    if (config.enable("enable-no-home-message"))
+                    {
+                        if (config.message("no-home-message") != null)
+                        {
+                            p.sendMessage(config.message("no-home-message"));
+                        }
+                    }
                 }
             }
         }
