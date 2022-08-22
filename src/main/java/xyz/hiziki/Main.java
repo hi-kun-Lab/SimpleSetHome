@@ -9,14 +9,12 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 
 public class Main extends JavaPlugin
 {
     private final File homesFile = new File(getDataFolder(), "Homes.yml");
     private final YamlConfiguration homes = YamlConfiguration.loadConfiguration(homesFile);
     private Config config;
-
 
     @Override
     public void onEnable() //プラグインが起動した時
@@ -40,9 +38,9 @@ public class Main extends JavaPlugin
 
         getLogger().info("プラグインは正常に停止しました。");
     }
-
+    @SuppressWarnings("NullableProblems")
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args)
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
         if(command.getName().equalsIgnoreCase("sethome"))
         {
