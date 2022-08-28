@@ -8,6 +8,5 @@ sethome-message: 'ホームを設定しました。'
 enable-teleport-message: true
 teleport-message: 'ホームにTPしました。'
 
-# --- ホームがなかった時 --- #
-enable-no-home-message: true
-no-home-message: 'ホームが設定されていません。'
+# --- 最大ホーム数 --- #
+max-home: 3
