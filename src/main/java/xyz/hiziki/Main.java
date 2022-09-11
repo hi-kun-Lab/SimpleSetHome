@@ -95,8 +95,6 @@ public class Main extends JavaPlugin
                                         if (config.message("sethome-message") != null) //メッセージがあるかどうかを確認して
                                         {
                                             p.sendMessage(ChatColor.AQUA + config.message("sethome-message")); //プレイヤーに送信する
-
-                                            p.sendMessage("あ");
                                         }
                                     }
                                 }
