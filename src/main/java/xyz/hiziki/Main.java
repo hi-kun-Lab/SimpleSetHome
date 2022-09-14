@@ -1,16 +1,11 @@
 package xyz.hiziki;
 
-import org.bukkit.*;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.hiziki.command.CommandManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 public class Main extends JavaPlugin
 {
@@ -66,8 +61,6 @@ public class Main extends JavaPlugin
             e.printStackTrace(); //
         }
     }
-
-
 
     public static JavaPlugin getPlugin()
     {

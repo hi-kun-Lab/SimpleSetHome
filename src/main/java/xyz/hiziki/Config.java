@@ -42,15 +42,6 @@ public class Config
             plugin.getLogger().info("teleportのメッセージがString形じゃありません。");
         }
 
-        if (!config.contains("no-home-message")) //config.yml ファイルの no-home-message
-        {
-            plugin.getLogger().info("config.yml にエラーが起こっています。");
-        }
-        else if (!config.isString("no-home-message"))
-        {
-            plugin.getLogger().info("no-homeのメッセージがString形じゃありません。");
-        }
-
         if (!config.contains("max-home")) //config.yml ファイルの max-home
         {
             plugin.getLogger().info("config.yml にエラーが起こっています。");

@@ -12,6 +12,7 @@ import java.util.Objects;
 public class HomeCommandExecutor implements CommandExecutor
 {
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -52,12 +53,18 @@ public class HomeCommandExecutor implements CommandExecutor
                                 else //ホームが設定されていたら
                                 {
                                     teleportHome(p, i);
+
                                     if (Main.getConfigFile().enable("enable-teleport-message")) //設定ファイルでメッセージがtrueになっていたら
                                     {
                                         if (Main.getConfigFile().message("teleport-message") != null) //メッセージがあるかどうかを確認して
                                         {
                                             p.sendMessage(ChatColor.AQUA + Main.getConfigFile().message("teleport-message")); //プレイヤーに送信する
                                         }
+                                    }
+
+                                    if (Main.getConfigFile().enable("enable-teleport-sound"))
+                                    {
+                                        p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
                                     }
                                 }
                             }
@@ -91,6 +98,5 @@ public class HomeCommandExecutor implements CommandExecutor
         float yaw = Main.getHomes().getLong("Homes." + p.getUniqueId() + "." + num + ".Yaw");
         float pitch = Main.getHomes().getLong("Homes." + p.getUniqueId() + "." + num + ".Pitch");
         p.teleport(new Location(world, x, y, z, yaw, pitch)); //ホームにテレポート
-        p.playSound(new Location(world, x, y, z), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
     }
 }
