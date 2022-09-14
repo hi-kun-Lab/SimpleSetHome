@@ -22,17 +22,13 @@ public class SetHomeTabCompleterHandler implements TabCompleter
         {
             if (command.getName().equalsIgnoreCase("sethome"))
             {
-                if (args.length == 0)
+                for (int i = 1; Main.getConfigFile().maxHome() >= i; i++)
                 {
-                    for (int i = 1; Main.getConfigFile().maxHome() == i; i++)
-                    {
-                        list.add(String.valueOf(i));
-                    }
-                    Collections.sort(list);
-                    return list;
+                    list.add(String.valueOf(i));
                 }
+                Collections.sort(list);
             }
         }
-        return null;
+        return list;
     }
 }

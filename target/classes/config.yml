@@ -1,0 +1,15 @@
+# --- 設定ファイル --- #
+
+# --- ホームを設定した時　--- #
+enable-sethome-sound: true
+enable-sethome-message: true
+sethome-message: 'ホームを設定しました。'
+
+# --- ホームにTPした時 ---#
+enable-teleport-sound: true
+enable-teleport-message: true
+teleport-message: 'ホームにTPしました。'
+
+
+# --- 最大ホーム数 --- #
+max-home: 3
