@@ -4,19 +4,32 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import xyz.hiziki.Config;
 import xyz.hiziki.Main;
 
+import java.io.File;
 import java.io.IOException;
 
 public class SetHomeCommandExecutor implements CommandExecutor
 {
+    private final JavaPlugin plugin = Main.getPlugin();
+
+    private final YamlConfiguration homes = Main.getHomes();
+
+    private final File homesFile = Main.getHomesFile();
+
+    private final Config config = Main.getConfigFile();
+
+    @SuppressWarnings("NullableProblems")
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
         if (!(sender instanceof Player)) //プレイヤーかどうかを確認 - プレイヤーじゃなかったら
         {
-            Main.getPlugin().getLogger().info("コマンドを実行出来るのはプレイヤーのみです。"); //エラーをコマンド実行者に送信
+            plugin.getLogger().info("コマンドを実行出来るのはプレイヤーのみです。"); //エラーをコマンド実行者に送信
         }
         else //プレイヤーだったら
         {
@@ -28,29 +41,22 @@ public class SetHomeCommandExecutor implements CommandExecutor
             }
             else //サブコマンドが設定されていたら
             {
-                if (!(isNum(args[0]))) //サブコマンドが数字じゃなかったら
+                if (Integer.parseInt(args[0]) > config.maxHome() || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    p.sendMessage(ChatColor.RED + "サブコマンドが数値ではありません。"); //エラーをプレイヤーに送信
+                    p.sendMessage(ChatColor.RED + "サブコマンドは 1~" + config.maxHome() + " までしかありません。");
                 }
-                else //サブコマンドが数字だったら
+                else //サブコマンドが設定されている数以内だったら
                 {
-                    if (Integer.parseInt(args[0]) > Main.getConfigFile().maxHome() || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
+                    for (int i = 1; i <= config.maxHome(); i++) //forで回して
                     {
-                        p.sendMessage(ChatColor.RED + "サブコマンドは 1~" + Main.getConfigFile().maxHome() + " までしかありません。");
-                    }
-                    else //サブコマンドが設定されている数以内だったら
-                    {
-                        for (int i = 1; i <= Main.getConfigFile().maxHome(); i++) //forで回して
+                        if (i == Integer.parseInt(args[0])) //ifで確認
                         {
-                            if (i == Integer.parseInt(args[0])) //ifで確認
+                            setHome(p, i); //sethomeメソッドでhomeを設定し
+                            if (config.enable("enable-sethome-message")) //設定ファイルでメッセージがtrueになっていたら
                             {
-                                setHome(p, i); //sethomeメソッドでhomeを設定し
-                                if (Main.getConfigFile().enable("enable-sethome-message")) //設定ファイルでメッセージがtrueになっていたら
+                                if (config.message("sethome-message") != null) //メッセージがあるかどうかを確認して
                                 {
-                                    if (Main.getConfigFile().message("sethome-message") != null) //メッセージがあるかどうかを確認して
-                                    {
-                                        p.sendMessage(ChatColor.AQUA + Main.getConfigFile().message("sethome-message")); //プレイヤーに送信する
-                                    }
+                                    p.sendMessage(ChatColor.AQUA + config.message("sethome-message")); //プレイヤーに送信する
                                 }
                             }
                         }
@@ -61,27 +67,14 @@ public class SetHomeCommandExecutor implements CommandExecutor
         return true; //return true はコマンドが実行されたとして処理するってこと。　false だったら実行されずにチャットとして送信されることになる。
     }
 
-    private Boolean isNum(String str) //数字確認メソッド
-    {
-        try
-        {
-            Integer.parseInt(str); //
-        }
-        catch (NumberFormatException e) //
-        {
-            return false; //falseとして返す→ifでつかったらそのifは実行されない
-        }
-        return true; //trueとして返す→ifで使ったらそのifが実行される
-    }
-
     private void setHome(Player p, int num) //ホーム設定メソッド
     {
-        Main.getHomes().set("Homes." + p.getUniqueId() + "." + num + ".World", p.getWorld().getName());
-        Main.getHomes().set("Homes." + p.getUniqueId() + "." + num + ".X", p.getLocation().getX());
-        Main.getHomes().set("Homes." + p.getUniqueId() + "." + num + ".Y", p.getLocation().getY());
-        Main.getHomes().set("Homes." + p.getUniqueId() + "." + num + ".Z", p.getLocation().getZ());
-        Main.getHomes().set("Homes." + p.getUniqueId() + "." + num + ".Yaw", p.getLocation().getYaw());
-        Main.getHomes().set("Homes." + p.getUniqueId() + "." + num + ".Pitch", p.getLocation().getPitch());
+        homes.set("Homes." + p.getUniqueId() + "." + num + ".World", p.getWorld().getName());
+        homes.set("Homes." + p.getUniqueId() + "." + num + ".X", p.getLocation().getX());
+        homes.set("Homes." + p.getUniqueId() + "." + num + ".Y", p.getLocation().getY());
+        homes.set("Homes." + p.getUniqueId() + "." + num + ".Z", p.getLocation().getZ());
+        homes.set("Homes." + p.getUniqueId() + "." + num + ".Yaw", p.getLocation().getYaw());
+        homes.set("Homes." + p.getUniqueId() + "." + num + ".Pitch", p.getLocation().getPitch());
         saveFile(); //ファイルを保存
 
         //こんな感じで保存される
@@ -100,11 +93,11 @@ public class SetHomeCommandExecutor implements CommandExecutor
     {
         try
         {
-            Main.getHomes().save(Main.getHomesFile()); //ymlファイルを保存する。
+            homes.save(homesFile); //ymlファイルを保存する。
         }
-        catch(IOException e) //
+        catch(IOException e)
         {
-            e.printStackTrace(); //
+            e.printStackTrace();
         }
     }
 }
