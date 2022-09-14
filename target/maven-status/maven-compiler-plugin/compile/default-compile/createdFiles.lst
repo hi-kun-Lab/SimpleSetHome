@@ -1,8 +1,0 @@
-xyz\hiziki\command\home\HomeTabCompleterHandler.class
-xyz\hiziki\command\CommandManager.class
-xyz\hiziki\command\sethome\SetHomeTabCompleterHandler.class
-xyz\hiziki\command\home\HomeCommandExecutor.class
-xyz\hiziki\Main.class
-xyz\hiziki\util\Prefix.class
-xyz\hiziki\command\sethome\SetHomeCommandExecutor.class
-xyz\hiziki\Config.class
