@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import xyz.hiziki.Config;
 import xyz.hiziki.Main;
 
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import java.util.List;
 
 public class HomeTabCompleterHandler implements TabCompleter
 {
+    private final Config config = Main.config;
+
     @SuppressWarnings("NullableProblems")
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args)
@@ -22,7 +25,7 @@ public class HomeTabCompleterHandler implements TabCompleter
         {
             if (command.getName().equalsIgnoreCase("home"))
             {
-                for (int i = 1; Main.getConfigFile().maxHome() >= i; i++)
+                for (int i = 1; config.maxHome() >= i; i++)
                 {
                     list.add(String.valueOf(i));
                 }

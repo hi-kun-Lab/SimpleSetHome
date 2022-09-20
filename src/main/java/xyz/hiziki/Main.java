@@ -9,14 +9,13 @@ import java.io.IOException;
 
 public class Main extends JavaPlugin
 {
+    public static JavaPlugin plugin;
 
-    private static JavaPlugin plugin;
+    public static Config config;
 
-    private static Config config;
+    public static File homesFile;
 
-    private static File homesFile;
-
-    private static YamlConfiguration homes;
+    public static YamlConfiguration homes;
 
     @Override
     public void onEnable()
@@ -60,25 +59,5 @@ public class Main extends JavaPlugin
         {
             e.printStackTrace(); //
         }
-    }
-
-    public static JavaPlugin getPlugin()
-    {
-        return plugin;
-    }
-
-    public static Config getConfigFile()
-    {
-        return config;
-    }
-
-    public static File getHomesFile()
-    {
-        return homesFile;
-    }
-
-    public static YamlConfiguration getHomes()
-    {
-        return homes;
     }
 }
