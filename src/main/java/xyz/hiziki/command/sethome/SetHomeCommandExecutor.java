@@ -15,13 +15,13 @@ import java.io.IOException;
 
 public class SetHomeCommandExecutor implements CommandExecutor
 {
-    private final JavaPlugin plugin = Main.getPlugin();
+    private final JavaPlugin plugin = Main.plugin;
 
-    private final YamlConfiguration homes = Main.getHomes();
+    private final YamlConfiguration homes = Main.homes;
 
-    private final File homesFile = Main.getHomesFile();
+    private final File homesFile = Main.homesFile;
 
-    private final Config config = Main.getConfigFile();
+    private final Config config = Main.config;
 
     @SuppressWarnings("NullableProblems")
     @Override

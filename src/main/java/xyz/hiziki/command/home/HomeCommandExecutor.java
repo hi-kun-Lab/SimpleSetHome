@@ -14,11 +14,9 @@ import java.util.Objects;
 
 public class HomeCommandExecutor implements CommandExecutor
 {
-    private final JavaPlugin plugin = Main.getPlugin();
-
-    private final YamlConfiguration homes = Main.getHomes();
-
-    private final Config config = Main.getConfigFile();
+    private final JavaPlugin plugin = Main.plugin;
+    private final YamlConfiguration homes = Main.homes;
+    private final Config config = Main.config;
 
     @SuppressWarnings("NullableProblems")
     @Override
