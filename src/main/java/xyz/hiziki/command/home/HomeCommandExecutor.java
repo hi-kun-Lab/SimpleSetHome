@@ -4,19 +4,23 @@ import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.hiziki.Config;
 import xyz.hiziki.Main;
+import xyz.hiziki.util.Prefix;
 
 import java.util.Objects;
 
 public class HomeCommandExecutor implements CommandExecutor
 {
     private final JavaPlugin plugin = Main.plugin;
+    
     private final YamlConfiguration homes = Main.homes;
-    private final Config config = Main.config;
+
+    private final FileConfiguration config = plugin.getConfig();
 
     @SuppressWarnings("NullableProblems")
     @Override
@@ -24,7 +28,14 @@ public class HomeCommandExecutor implements CommandExecutor
     {
         if (!(sender instanceof Player)) //プレイヤーかどうかを確認 - プレイヤーじゃなかったら
         {
-           plugin.getLogger().info("コマンドを実行出来るのはプレイヤーのみです。"); //エラーをコマンド実行者に送信
+            if (sender instanceof ConsoleCommandSender)
+            {
+                plugin.getLogger().info("コマンドを実行出来るのはプレイヤーのみです。"); //エラーをコンソールに送信
+            }
+            else
+            {
+                sender.sendMessage("コマンドを実行出来るのはプレイヤーのみです。");
+            }
         }
         else //プレイヤーだったら
         {
@@ -32,36 +43,40 @@ public class HomeCommandExecutor implements CommandExecutor
 
             if (args.length == 0) //args が0だったら = サブコマンドが設定されていなかったら
             {
-                p.sendMessage(ChatColor.RED + "サブコマンドが設定されていません。"); //エラーをプレイヤーに送信
+                new Prefix(p, ChatColor.RED + "サブコマンドが設定されていません。"); //エラーをプレイヤーに送信
             }
             else //サブコマンドが設定されていたら
             {
-                if (Integer.parseInt(args[0]) > config.maxHome() || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
+                if (Integer.parseInt(args[0]) > config.getInt("max-home")
+                        || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    p.sendMessage(ChatColor.RED + "サブコマンドは 1~" + config.maxHome() + " までしかありません。"); //エラーをプレイヤーに送信
+                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + plugin.getConfig().getInt("max-home")
+                            + " までしかありません。"); //エラーをプレイヤーに送信
                 }
                 else //サブコマンドが設定されている数以内だったら
                 {
-                    for (int i = 1; i <= config.maxHome(); i++) //forで回して
+                    for (int i = 1; i <= config.getInt("max-home"); i++) //forで回して
                     {
                         if (i == Integer.parseInt(args[0])) //ifで確認
                         {
-                            if (homes.getString("Homes." + p.getUniqueId() + "." + i) == null) //ホームが設定されていなかったら
+                            if (homes.getString("Homes." + p.getUniqueId() + "." + i) == null) //ホームが設定されていない場合
                             {
-                                p.sendMessage(ChatColor.RED + "ホーム " + i + " は設定されていません。"); //エラーをプレイヤーに送信
+                                new Prefix(p, ChatColor.RED + "ホーム " + i
+                                        + " は設定されていません。"); //エラーをプレイヤーに送信
                             }
                             else //ホームが設定されていたら
                             {
                                 teleportHome(p, i);
 
-                                if (config.enable("enable-teleport-message")) //設定ファイルでメッセージがtrueになっていたら
+                                if (config.getBoolean("enable-teleport-message")) //設定ファイルでメッセージがtrueになっていたら
                                 {
-                                    if (config.message("teleport-message") != null) //メッセージがあるかどうかを確認して
+                                    if (config.getString("teleport-message") != null) //メッセージがあるかどうかを確認して
                                     {
-                                        p.sendMessage(ChatColor.AQUA + config.message("teleport-message")); //プレイヤーに送信する
+                                        new Prefix(p, ChatColor.AQUA
+                                                + plugin.getConfig().getString("teleport-message")); //プレイヤーに送信する
                                     }
                                 }
-                                if (config.enable("enable-teleport-sound"))
+                                if (config.getBoolean("enable-teleport-sound"))
                                 {
                                     p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
                                 }
@@ -76,12 +91,7 @@ public class HomeCommandExecutor implements CommandExecutor
 
     private void teleportHome(Player p, int num)
     {
-        World world = Bukkit.getWorld(Objects.requireNonNull(homes.getString("Homes." + p.getUniqueId() + "." + num + ".World")));
-        double x = homes.getDouble("Homes." + p.getUniqueId() + "." + num + ".X");
-        double y = homes.getDouble("Homes." + p.getUniqueId() + "." + num + ".Y");
-        double z = homes.getDouble("Homes." + p.getUniqueId() + "." + num + ".Z");
-        float yaw = homes.getLong("Homes." + p.getUniqueId() + "." + num + ".Yaw");
-        float pitch = homes.getLong("Homes." + p.getUniqueId() + "." + num + ".Pitch");
-        p.teleport(new Location(world, x, y, z, yaw, pitch)); // ホームにテレポート
+        p.teleport(Objects.requireNonNull(
+                homes.getLocation("Homes." + p.getUniqueId() + "." + num + ".Location"))); // ホームにテレポート
     }
 }

@@ -1,7 +1,6 @@
 package xyz.hiziki.command;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.hiziki.Main;
 import xyz.hiziki.command.home.HomeCommandExecutor;
 import xyz.hiziki.command.home.HomeTabCompleterHandler;
 import xyz.hiziki.command.sethome.SetHomeCommandExecutor;
@@ -11,9 +10,7 @@ import java.util.Objects;
 
 public class CommandManager
 {
-    private final JavaPlugin plugin = Main.plugin;
-
-    public CommandManager()
+    public CommandManager(JavaPlugin plugin)
     {
         Objects.requireNonNull(plugin.getCommand("home")).setExecutor(new HomeCommandExecutor());
         Objects.requireNonNull(plugin.getCommand("home")).setTabCompleter(new HomeTabCompleterHandler());

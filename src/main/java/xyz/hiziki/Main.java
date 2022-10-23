@@ -3,9 +3,9 @@ package xyz.hiziki;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.hiziki.command.CommandManager;
+import xyz.hiziki.util.SaveFile;
 
 import java.io.File;
-import java.io.IOException;
 
 public class Main extends JavaPlugin
 {
@@ -32,7 +32,7 @@ public class Main extends JavaPlugin
 
         homes = YamlConfiguration.loadConfiguration(homesFile);
 
-        new CommandManager();
+        new CommandManager(this);
 
         getLogger().info("プラグインは正常に起動しました。");
     }
@@ -44,20 +44,8 @@ public class Main extends JavaPlugin
 
         super.onDisable(); //俺もよくわからんけど書いてる(書かないといけない)らしい
 
-        saveFile(); //ファイルを保存する
+        new SaveFile(); //ファイルを保存する
 
         getLogger().info("プラグインは正常に停止しました。");
-    }
-
-    private void saveFile() //yml保存メソッド
-    {
-        try
-        {
-            homes.save(homesFile); //ymlファイルを保存する。
-        }
-        catch(IOException e) //
-        {
-            e.printStackTrace(); //
-        }
     }
 }

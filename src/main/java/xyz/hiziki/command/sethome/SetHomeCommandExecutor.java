@@ -4,11 +4,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.hiziki.Config;
 import xyz.hiziki.Main;
+import xyz.hiziki.util.Prefix;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
 
     private final File homesFile = Main.homesFile;
 
-    private final Config config = Main.config;
+    private final FileConfiguration config = plugin.getConfig();
 
     @SuppressWarnings("NullableProblems")
     @Override
@@ -37,26 +38,27 @@ public class SetHomeCommandExecutor implements CommandExecutor
 
             if (args.length == 0) //args が0だったら = サブコマンドが設定されていなかったら
             {
-                p.sendMessage(ChatColor.RED + "サブコマンドが設定されていません。"); //エラーをプレイヤーに送信
+                new Prefix(p, ChatColor.RED + "サブコマンドが設定されていません。"); //エラーをプレイヤーに送信
             }
             else //サブコマンドが設定されていたら
             {
-                if (Integer.parseInt(args[0]) > config.maxHome() || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
+                if (Integer.parseInt(args[0]) > config.getInt("max-home") || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    p.sendMessage(ChatColor.RED + "サブコマンドは 1~" + config.maxHome() + " までしかありません。");
+                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.getInt("max-home") + " までしかありません。");
                 }
                 else //サブコマンドが設定されている数以内だったら
                 {
-                    for (int i = 1; i <= config.maxHome(); i++) //forで回して
+                    for (int i = 1; i <= config.getInt("max-home"); i++) //forで回して
                     {
                         if (i == Integer.parseInt(args[0])) //ifで確認
                         {
                             setHome(p, i); //sethomeメソッドでhomeを設定し
-                            if (config.enable("enable-sethome-message")) //設定ファイルでメッセージがtrueになっていたら
+
+                            if (config.getBoolean("enable-sethome-message")) //設定ファイルでメッセージがtrueになっていたら
                             {
-                                if (config.message("sethome-message") != null) //メッセージがあるかどうかを確認して
+                                if (config.getString("sethome-message") != null) //メッセージがあるかどうかを確認して
                                 {
-                                    p.sendMessage(ChatColor.AQUA + config.message("sethome-message")); //プレイヤーに送信する
+                                    new Prefix(p, ChatColor.AQUA + config.getString("sethome-message")); //プレイヤーに送信する
                                 }
                             }
                         }
@@ -69,12 +71,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
 
     private void setHome(Player p, int num) //ホーム設定メソッド
     {
-        homes.set("Homes." + p.getUniqueId() + "." + num + ".World", p.getWorld().getName());
-        homes.set("Homes." + p.getUniqueId() + "." + num + ".X", p.getLocation().getX());
-        homes.set("Homes." + p.getUniqueId() + "." + num + ".Y", p.getLocation().getY());
-        homes.set("Homes." + p.getUniqueId() + "." + num + ".Z", p.getLocation().getZ());
-        homes.set("Homes." + p.getUniqueId() + "." + num + ".Yaw", p.getLocation().getYaw());
-        homes.set("Homes." + p.getUniqueId() + "." + num + ".Pitch", p.getLocation().getPitch());
+        homes.set("Homes." + p.getUniqueId() + "." + num + ".World", p.getLocation());
         saveFile(); //ファイルを保存
 
         //こんな感じで保存される

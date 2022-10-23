@@ -1,23 +1,24 @@
 package xyz.hiziki;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class Config
 {
-    private final Plugin plugin;
+    private final JavaPlugin plugin;
     private FileConfiguration config = null;
 
-    public Config(Plugin pl)
+    public Config(JavaPlugin pl)
     {
-        this.plugin = pl;
+        plugin = pl;
         load();
     }
 
     public void load()
     {
         plugin.saveDefaultConfig(); // 設定ファイルを保存
-        if (config != null) //configファイルがなかったら
+
+        if (config != null) //configファイルがあったら
         {
             plugin.reloadConfig();
         }
@@ -50,17 +51,5 @@ public class Config
         {
             plugin.getLogger().info("max-homeの最大数が数値じゃありません。");
         }
-    }
-    public Boolean enable(String enable)
-    {
-        return config.getBoolean(enable);
-    }
-    public String message(String msg)
-    {
-        return config.getString(msg);
-    }
-    public int maxHome()
-    {
-        return config.getInt("max-home");
     }
 }
