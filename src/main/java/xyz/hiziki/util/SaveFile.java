@@ -11,6 +11,7 @@ public class SaveFile
     public SaveFile() //yml保存
     {
         File homesFile = Main.getHomesFile();
+
         YamlConfiguration homes = Main.getHomes();
 
         try
