@@ -10,17 +10,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.hiziki.Main;
 import xyz.hiziki.util.Prefix;
-
-import java.io.File;
-import java.io.IOException;
+import xyz.hiziki.util.SaveFile;
 
 public class SetHomeCommandExecutor implements CommandExecutor
 {
     private final JavaPlugin plugin = Main.getPlugin();
 
     private final YamlConfiguration homes = Main.getHomes();
-
-    private final File homesFile = Main.getHomesFile();
 
     private final FileConfiguration config = plugin.getConfig();
 
@@ -71,24 +67,12 @@ public class SetHomeCommandExecutor implements CommandExecutor
     {
         homes.set("Homes." + p.getUniqueId() + "." + num + ".World", p.getLocation());
 
-        saveFile(); //ファイルを保存
+        new SaveFile(); //ファイルを保存
 
         //こんな感じで保存される
         //Homes:
         //  7aa912df-eeed-49d6-814e-5c8994d527f3:
         //    '1':
         //    location:
-    }
-
-    private void saveFile() //yml保存メソッド
-    {
-        try
-        {
-            homes.save(homesFile); //ymlファイルを保存する。
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
     }
 }
