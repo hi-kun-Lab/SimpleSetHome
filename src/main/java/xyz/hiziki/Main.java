@@ -9,11 +9,11 @@ import java.io.File;
 
 public class Main extends JavaPlugin
 {
-    public static JavaPlugin plugin;
+    private static JavaPlugin plugin;
 
-    public static File homesFile;
+    private static File homesFile;
 
-    public static YamlConfiguration homes;
+    private static YamlConfiguration homes;
 
     @Override
     public void onEnable()
@@ -45,5 +45,20 @@ public class Main extends JavaPlugin
         new SaveFile(); //ファイルを保存する
 
         getLogger().info("プラグインは正常に停止しました。");
+    }
+
+    public static JavaPlugin getPlugin()
+    {
+        return plugin;
+    }
+
+    public static File getHomesFile()
+    {
+        return homesFile;
+    }
+
+    public static YamlConfiguration getHomes()
+    {
+        return homes;
     }
 }

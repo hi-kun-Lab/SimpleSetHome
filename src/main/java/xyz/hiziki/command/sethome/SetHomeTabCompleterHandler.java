@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SetHomeTabCompleterHandler implements TabCompleter
 {
-    private final JavaPlugin plugin = Main.plugin;
+    private final JavaPlugin plugin = Main.getPlugin();
 
     private final FileConfiguration config = plugin.getConfig();
 

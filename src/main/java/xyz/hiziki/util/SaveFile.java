@@ -10,8 +10,8 @@ public class SaveFile
 {
     public SaveFile() //yml保存
     {
-        File homesFile = Main.homesFile;
-        YamlConfiguration homes = Main.homes;
+        File homesFile = Main.getHomesFile();
+        YamlConfiguration homes = Main.getHomes();
 
         try
         {

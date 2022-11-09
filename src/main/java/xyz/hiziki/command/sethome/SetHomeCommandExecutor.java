@@ -16,11 +16,11 @@ import java.io.IOException;
 
 public class SetHomeCommandExecutor implements CommandExecutor
 {
-    private final JavaPlugin plugin = Main.plugin;
+    private final JavaPlugin plugin = Main.getPlugin();
 
-    private final YamlConfiguration homes = Main.homes;
+    private final YamlConfiguration homes = Main.getHomes();
 
-    private final File homesFile = Main.homesFile;
+    private final File homesFile = Main.getHomesFile();
 
     private final FileConfiguration config = plugin.getConfig();
 
