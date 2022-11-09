@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Config
 {
     private final JavaPlugin plugin;
+
     private FileConfiguration config;
 
     public Config(JavaPlugin pl)
@@ -25,16 +26,16 @@ public class Config
 
         config = plugin.getConfig();
 
-        if (!config.contains("sethome-message")) //config.yml ファイルの sethome-message
+        if (!config.contains("set-home-message")) //config.yml ファイルの set-home-message
         {
             plugin.getLogger().info("config.yml にエラーが起こっています。");
         }
-        else if (!config.isString("sethome-message"))
+        else if (!config.isString("set-home-message"))
         {
-            plugin.getLogger().info("sethomeのメッセージがString形じゃありません。");
+            plugin.getLogger().info("set-homeのメッセージがString形じゃありません。");
         }
 
-        if (!config.contains("sethome-message")) //config.yml ファイルの sethome-message
+        if (!config.contains("set-home-message")) //config.yml ファイルの set-home-message
         {
             plugin.getLogger().info("config.yml にエラーが起こっています。");
         }
