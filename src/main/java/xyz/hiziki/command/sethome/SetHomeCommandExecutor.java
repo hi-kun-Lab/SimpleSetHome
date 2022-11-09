@@ -28,14 +28,12 @@ public class SetHomeCommandExecutor implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (!(sender instanceof Player)) //プレイヤーかどうかを確認 - プレイヤーじゃなかったら
+        if (!(sender instanceof Player p)) //プレイヤーかどうかを確認 - プレイヤーじゃなかったら
         {
             plugin.getLogger().info("コマンドを実行出来るのはプレイヤーのみです。"); //エラーをコマンド実行者に送信
         }
         else //プレイヤーだったら
         {
-            Player p = (Player) sender; //sender(CommandSender)をPlayer型にキャストし、pという変数名で宣言
-
             if (args.length == 0) //args が0だったら = サブコマンドが設定されていなかったら
             {
                 new Prefix(p, ChatColor.RED + "サブコマンドが設定されていません。"); //エラーをプレイヤーに送信
