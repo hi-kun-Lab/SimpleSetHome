@@ -84,7 +84,7 @@ public class HomeCommandExecutor implements CommandExecutor
                 }
             }
         }
-        return true; // return true はコマンドが実行されたとして処理するってこと。　false だったら実行されずにチャットとして送信されることになる。
+        return true; //return false だったら実行されずにチャットとして送信されることになる。
     }
 
     private void teleportHome(Player p, int num)

@@ -64,24 +64,20 @@ public class SetHomeCommandExecutor implements CommandExecutor
                 }
             }
         }
-        return true; //return true はコマンドが実行されたとして処理するってこと。　false だったら実行されずにチャットとして送信されることになる。
+        return true; //return false だったら実行されずにチャットとして送信されることになる。
     }
 
     private void setHome(Player p, int num) //ホーム設定メソッド
     {
         homes.set("Homes." + p.getUniqueId() + "." + num + ".World", p.getLocation());
+
         saveFile(); //ファイルを保存
 
         //こんな感じで保存される
         //Homes:
         //  7aa912df-eeed-49d6-814e-5c8994d527f3:
         //    '1':
-        //      World: world
-        //      X: 1.0
-        //      Y: 50.0
-        //      Z: 0.0
-        //      Yaw: 0.0
-        //      Pitch: 0.0
+        //    location:
     }
 
     private void saveFile() //yml保存メソッド
