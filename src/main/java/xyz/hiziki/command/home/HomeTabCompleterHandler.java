@@ -4,7 +4,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.hiziki.Main;
 
@@ -24,16 +23,13 @@ public class HomeTabCompleterHandler implements TabCompleter
     {
         List<String> list = new ArrayList<>();
 
-        if (sender instanceof Player)
+        if (command.getName().equalsIgnoreCase("home"))
         {
-            if (command.getName().equalsIgnoreCase("home"))
+            for (int i = 1; config.getInt("max-home") >= i; i++)
             {
-                for (int i = 1; config.getInt("max-home") >= i; i++)
-                {
-                    list.add(String.valueOf(i));
-                }
-                Collections.sort(list);
+                list.add(String.valueOf(i));
             }
+            Collections.sort(list);
         }
         return list;
     }
