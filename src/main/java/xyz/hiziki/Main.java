@@ -11,8 +11,6 @@ public class Main extends JavaPlugin
 {
     public static JavaPlugin plugin;
 
-    public static Config config;
-
     public static File homesFile;
 
     public static YamlConfiguration homes;
@@ -26,11 +24,11 @@ public class Main extends JavaPlugin
 
         plugin = this;
 
-        config = new Config(this);
-
         homesFile = new File(getDataFolder(), "Homes.yml");
 
         homes = YamlConfiguration.loadConfiguration(homesFile);
+
+        new Config(this);
 
         new CommandManager(this);
 
