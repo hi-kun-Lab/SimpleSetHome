@@ -23,7 +23,7 @@ public class SetHomeTabCompleterHandler implements TabCompleter
     {
         List<String> list = new ArrayList<>();
 
-        if (command.getName().equalsIgnoreCase("sethome"))
+        if (command.getName().equalsIgnoreCase("setHome"))
         {
             for (int i = 1; config.getInt("max-home") >= i; i++)
             {
