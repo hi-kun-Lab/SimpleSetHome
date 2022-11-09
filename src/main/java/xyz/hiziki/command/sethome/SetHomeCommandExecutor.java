@@ -46,13 +46,13 @@ public class SetHomeCommandExecutor implements CommandExecutor
                     {
                         if (i == Integer.parseInt(args[0])) //ifで確認
                         {
-                            setHome(p, i); //sethomeメソッドでhomeを設定し
+                            setHome(p, i); //setHomeメソッドでhomeを設定し
 
-                            if (config.getBoolean("enable-sethome-message")) //設定ファイルでメッセージがtrueになっていたら
+                            if (config.getBoolean("enable-set-home-message")) //設定ファイルでメッセージがtrueになっていたら
                             {
-                                if (config.getString("sethome-message") != null) //メッセージがあるかどうかを確認して
+                                if (config.getString("set-home-message") != null) //メッセージがあるかどうかを確認して
                                 {
-                                    new Prefix(p, ChatColor.AQUA + config.getString("sethome-message")); //プレイヤーに送信する
+                                    new Prefix(p, ChatColor.AQUA + config.getString("set-home-message")); //プレイヤーに送信する
                                 }
                             }
                         }

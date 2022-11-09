@@ -1,11 +1,11 @@
 # --- 設定ファイル --- #
 
 # --- ホームを設定した時　--- #
-enable-sethome-sound: true
-enable-sethome-message: true
-sethome-message: 'ホームを設定しました。'
-enable-sethome-delay: false
-sethome-delay(s): 5
+enable-set-home-sound: true
+enable-set-home-message: true
+set-home-message: 'ホームを設定しました。'
+enable-set-home-delay: false
+set-home-delay(s): 5
 
 # --- ホームにTPした時 ---#
 enable-teleport-sound: true
