@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Config
 {
     private final JavaPlugin plugin;
-    private FileConfiguration config = null;
+    private FileConfiguration config;
 
     public Config(JavaPlugin pl)
     {
