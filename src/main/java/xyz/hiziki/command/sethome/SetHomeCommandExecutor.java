@@ -1,14 +1,15 @@
 package xyz.hiziki.command.sethome;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.hiziki.Main;
+import xyz.hiziki.config.ConfigFile;
 import xyz.hiziki.util.Prefix;
 import xyz.hiziki.util.SaveFile;
 
@@ -18,7 +19,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
 
     private final YamlConfiguration homes = Main.getHomes();
 
-    private final FileConfiguration config = plugin.getConfig();
+    private final ConfigFile config = new ConfigFile();
 
     @SuppressWarnings("NullableProblems")
     @Override
@@ -36,24 +37,28 @@ public class SetHomeCommandExecutor implements CommandExecutor
             }
             else //サブコマンドが設定されていたら
             {
-                if (Integer.parseInt(args[0]) > config.getInt("max-home") || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
+                if (Integer.parseInt(args[0]) > config.getMaxHome() || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.getInt("max-home") + " までしかありません。");
+                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.getMaxHome() + " までしかありません。");
                 }
                 else //サブコマンドが設定されている数以内だったら
                 {
-                    for (int i = 1; i <= config.getInt("max-home"); i++) //forで回して
+                    for (int i = 1; i <= config.getMaxHome(); i++) //forで回して
                     {
                         if (i == Integer.parseInt(args[0])) //ifで確認
                         {
                             setHome(p, i); //setHomeメソッドでhomeを設定し
 
-                            if (config.getBoolean("enable-set-home-message")) //設定ファイルでメッセージがtrueになっていたら
+                            if (config.getEnableSetHomeMessage()) //設定ファイルでメッセージがtrueになっていたら
                             {
-                                if (config.getString("set-home-message") != null) //メッセージがあるかどうかを確認して
+                                if (config.getSetHomeMessage() != null) //メッセージがあるかどうかを確認して
                                 {
-                                    new Prefix(p, ChatColor.AQUA + config.getString("set-home-message")); //プレイヤーに送信する
+                                    new Prefix(p, ChatColor.AQUA + config.getSetHomeMessage()); //プレイヤーに送信する
                                 }
+                            }
+                            if (config.getEnableSetHomeSound())
+                            {
+                                p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                             }
                         }
                     }

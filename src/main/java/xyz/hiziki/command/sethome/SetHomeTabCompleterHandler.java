@@ -3,9 +3,7 @@ package xyz.hiziki.command.sethome;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
-import xyz.hiziki.Main;
+import xyz.hiziki.config.ConfigFile;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,9 +11,7 @@ import java.util.List;
 
 public class SetHomeTabCompleterHandler implements TabCompleter
 {
-    private final JavaPlugin plugin = Main.getPlugin();
-
-    private final FileConfiguration config = plugin.getConfig();
+    private final ConfigFile config = new ConfigFile();
 
     @SuppressWarnings("NullableProblems")
     @Override
@@ -25,7 +21,7 @@ public class SetHomeTabCompleterHandler implements TabCompleter
 
         if (command.getName().equalsIgnoreCase("setHome"))
         {
-            for (int i = 1; config.getInt("max-home") >= i; i++)
+            for (int i = 1; config.getMaxHome() >= i; i++)
             {
                 list.add(String.valueOf(i));
             }

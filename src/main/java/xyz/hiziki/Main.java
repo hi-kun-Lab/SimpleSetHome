@@ -3,6 +3,7 @@ package xyz.hiziki;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.hiziki.command.CommandManager;
+import xyz.hiziki.config.Config;
 import xyz.hiziki.util.SaveFile;
 
 import java.io.File;

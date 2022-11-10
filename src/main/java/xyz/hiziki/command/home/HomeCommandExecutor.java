@@ -5,11 +5,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.hiziki.Main;
+import xyz.hiziki.config.ConfigFile;
 import xyz.hiziki.util.Prefix;
 
 import java.util.Objects;
@@ -20,7 +20,7 @@ public class HomeCommandExecutor implements CommandExecutor
     
     private final YamlConfiguration homes = Main.getHomes();
 
-    private final FileConfiguration config = plugin.getConfig();
+    private final ConfigFile config = new ConfigFile();
 
     @SuppressWarnings("NullableProblems")
     @Override
@@ -45,7 +45,7 @@ public class HomeCommandExecutor implements CommandExecutor
             }
             else //サブコマンドが設定されていたら
             {
-                if (Integer.parseInt(args[0]) > config.getInt("max-home")
+                if (Integer.parseInt(args[0]) > config.getMaxHome()
                         || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
                     new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + plugin.getConfig().getInt("max-home")
@@ -53,7 +53,7 @@ public class HomeCommandExecutor implements CommandExecutor
                 }
                 else //サブコマンドが設定されている数以内だったら
                 {
-                    for (int i = 1; i <= config.getInt("max-home"); i++) //forで回して
+                    for (int i = 1; i <= config.getMaxHome(); i++) //forで回して
                     {
                         if (i == Integer.parseInt(args[0])) //ifで確認
                         {
@@ -66,15 +66,15 @@ public class HomeCommandExecutor implements CommandExecutor
                             {
                                 teleportHome(p, i);
 
-                                if (config.getBoolean("enable-teleport-message")) //設定ファイルでメッセージがtrueになっていたら
+                                if (config.getEnableTeleportMessage()) //設定ファイルでメッセージがtrueになっていたら
                                 {
-                                    if (config.getString("teleport-message") != null) //メッセージがあるかどうかを確認して
+                                    if (config.getTeleportMessage() != null) //メッセージがあるかどうかを確認して
                                     {
                                         new Prefix(p, ChatColor.AQUA
-                                                + plugin.getConfig().getString("teleport-message")); //プレイヤーに送信する
+                                                + config.getTeleportMessage()); //プレイヤーに送信する
                                     }
                                 }
-                                if (config.getBoolean("enable-teleport-sound"))
+                                if (config.getEnableTeleportSound())
                                 {
                                     p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
                                 }

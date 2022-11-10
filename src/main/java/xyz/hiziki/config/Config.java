@@ -1,4 +1,4 @@
-package xyz.hiziki;
+package xyz.hiziki.config;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
