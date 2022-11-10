@@ -4,15 +4,11 @@
 enable-set-home-sound: true
 enable-set-home-message: true
 set-home-message: 'ホームを設定しました。'
-enable-set-home-delay: false
-set-home-delay(s): 5
 
 # --- ホームにTPした時 ---#
 enable-teleport-sound: true
 enable-teleport-message: true
 teleport-message: 'ホームにTPしました。'
-enable-teleport-delay: true
-teleport-delay(s): 5
 
 # --- 最大ホーム数 --- #
 max-home: 3
