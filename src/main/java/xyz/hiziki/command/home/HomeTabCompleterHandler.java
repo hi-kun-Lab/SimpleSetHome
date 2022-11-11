@@ -13,20 +13,17 @@ public class HomeTabCompleterHandler implements TabCompleter
 {
     private final ConfigFile config = new ConfigFile();
 
-    @SuppressWarnings("NullableProblems")
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args)
     {
         List<String> list = new ArrayList<>();
 
-        if (command.getName().equalsIgnoreCase("home"))
+        for (int i = 1; config.getMaxHome() >= i; i++)
         {
-            for (int i = 1; config.getMaxHome() >= i; i++)
-            {
-                list.add(String.valueOf(i));
-            }
-            Collections.sort(list);
+            list.add(String.valueOf(i));
         }
+
+        Collections.sort(list);
         return list;
     }
 }
