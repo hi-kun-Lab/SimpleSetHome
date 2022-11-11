@@ -53,32 +53,26 @@ public class HomeCommandExecutor implements CommandExecutor
                 }
                 else //サブコマンドが設定されている数以内だったら
                 {
-                    for (int i = 1; i <= config.getMaxHome(); i++) //forで回して
+                    if (homes.getString("Homes." + p.getUniqueId() + "." + Integer.parseInt(args[0])) == null)
                     {
-                        if (i == Integer.parseInt(args[0])) //ifで確認
-                        {
-                            if (homes.getString("Homes." + p.getUniqueId() + "." + i) == null) //ホームが設定されていない場合
-                            {
-                                new Prefix(p, ChatColor.RED + "ホーム " + i
-                                        + " は設定されていません。"); //エラーをプレイヤーに送信
-                            }
-                            else //ホームが設定されていたら
-                            {
-                                teleportHome(p, i);
+                        new Prefix(p, ChatColor.RED + "ホーム " + Integer.parseInt(args[0])
+                                + " は設定されていません。"); //ホームが設定されていない場合エラーをプレイヤーに送信
+                    }
+                    else //ホームが設定されていたら
+                    {
+                        teleportHome(p, Integer.parseInt(args[0]));
 
-                                if (config.getEnableTeleportMessage()) //設定ファイルでメッセージがtrueになっていたら
-                                {
-                                    if (config.getTeleportMessage() != null) //メッセージがあるかどうかを確認して
-                                    {
-                                        new Prefix(p, ChatColor.AQUA
-                                                + config.getTeleportMessage()); //プレイヤーに送信する
-                                    }
-                                }
-                                if (config.getEnableTeleportSound())
-                                {
-                                    p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
-                                }
+                        if (config.getEnableTeleportMessage()) //設定ファイルでメッセージがtrueになっていたら
+                        {
+                            if (config.getTeleportMessage() != null) //メッセージがあるかどうかを確認して
+                            {
+                                new Prefix(p, ChatColor.AQUA
+                                        + config.getTeleportMessage()); //プレイヤーに送信する
                             }
+                        }
+                        if (config.getEnableTeleportSound()) //効果音を送信
+                        {
+                            p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
                         }
                     }
                 }

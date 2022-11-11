@@ -51,24 +51,18 @@ public class SetHomeCommandExecutor implements CommandExecutor
                 }
                 else //サブコマンドが設定されている数以内だったら
                 {
-                    for (int i = 1; i <= config.getMaxHome(); i++) //forで回して
-                    {
-                        if (i == Integer.parseInt(args[0])) //ifで確認
-                        {
-                            setHome(p, i); //setHomeメソッドでhomeを設定し
+                    setHome(p, Integer.parseInt(args[0])); //setHomeメソッドでhomeを設定し
 
-                            if (config.getEnableSetHomeMessage()) //設定ファイルでメッセージがtrueになっていたら
-                            {
-                                if (config.getSetHomeMessage() != null) //メッセージがあるかどうかを確認して
-                                {
-                                    new Prefix(p, ChatColor.AQUA + config.getSetHomeMessage()); //プレイヤーに送信する
-                                }
-                            }
-                            if (config.getEnableSetHomeSound())
-                            {
-                                p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-                            }
+                    if (config.getEnableSetHomeMessage()) //設定ファイルでメッセージがtrueになっていたら
+                    {
+                        if (config.getSetHomeMessage() != null) //メッセージがあるかどうかを確認して
+                        {
+                            new Prefix(p, ChatColor.AQUA + config.getSetHomeMessage()); //プレイヤーに送信する
                         }
+                    }
+                    if (config.getEnableSetHomeSound()) //効果音を再生
+                    {
+                        p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                     }
                 }
             }
