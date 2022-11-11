@@ -26,31 +26,61 @@ public class Config
 
         config = plugin.getConfig();
 
-        if (!config.contains("set-home-message")) //config.yml ファイルの set-home-message
+        if (!config.contains("enable-set-home-sound") || !config.contains("enable-teleport-sound") ||
+                !config.contains("enable-set-home-message") || !config.contains("enable-teleport-message") ||
+                !config.contains("set-home-message") || !config.contains("teleport-message") ||
+                !config.contains("max-home"))
         {
             plugin.getLogger().info("config.yml にエラーが起こっています。");
-        }
-        else if (!config.isString("set-home-message"))
-        {
-            plugin.getLogger().info("set-homeのメッセージがString形じゃありません。");
         }
 
-        if (!config.contains("set-home-message")) //config.yml ファイルの set-home-message
+        if (!config.isBoolean("enable-set-home-sound"))
         {
-            plugin.getLogger().info("config.yml にエラーが起こっています。");
-        }
-        else if (!config.isString("teleport-message"))
-        {
-            plugin.getLogger().info("teleportのメッセージがString形じゃありません。");
+            plugin.getLogger().info("enable-set-home-soundがBoolean形じゃありません。");
         }
 
-        if (!config.contains("max-home")) //config.yml ファイルの max-home
+        if (!config.isBoolean("enable-set-home-message"))
         {
-            plugin.getLogger().info("config.yml にエラーが起こっています。");
+            plugin.getLogger().info("enable-set-home-messageがBoolean形じゃありません。");
         }
-        else if (!config.isInt("max-home"))
+
+        if (!config.isString("set-home-message"))
         {
-            plugin.getLogger().info("max-homeの最大数が数値じゃありません。");
+            plugin.getLogger().info("set-home-messageがString形じゃありません。");
+        }
+
+        if (!config.isBoolean("enable-teleport-sound"))
+        {
+            plugin.getLogger().info("enable-teleport-soundがBoolean形じゃありません。");
+        }
+
+        if (!config.isBoolean("enable-teleport-message"))
+        {
+            plugin.getLogger().info("enable-teleport-messageがBoolean形じゃありません。");
+        }
+
+        if (!config.isString("teleport-message"))
+        {
+            plugin.getLogger().info("teleport-messageがString形じゃありません。");
+        }
+
+        if (!config.isInt("max-home"))
+        {
+            plugin.getLogger().info("max-homeがInt形じゃありません。");
         }
     }
 }
+//# --- 設定ファイル --- #
+//
+//# --- ホームを設定した時　--- #
+//enable-set-home-sound: true
+//enable-set-home-message: true
+//set-home-message: 'ホームを設定しました。'
+//
+//# --- ホームにTPした時 ---#
+//enable-teleport-sound: true
+//enable-teleport-message: true
+//teleport-message: 'ホームにTPしました。'
+//
+//# --- 最大ホーム数 --- #
+//max-home: 3
