@@ -10,38 +10,53 @@ public class ConfigFile
 
     private final FileConfiguration config = plugin.getConfig();
 
-    public boolean getEnableSetHomeSound()
+    public boolean getENABLE_SET_HOME_SOUND()
     {
         return config.getBoolean("enable-set-home-sound");
     }
 
-    public boolean getEnableSetHomeMessage()
+    public boolean getENABLE_SET_HOME_MESSAGE()
     {
         return config.getBoolean("enable-set-home-message");
     }
 
-    public String getSetHomeMessage()
+    public String getSET_HOME_MESSAGE()
     {
         return config.getString("set-home-message");
     }
 
-    public boolean getEnableTeleportSound()
+    public boolean getENABLE_TELEPORT_SOUND()
     {
         return config.getBoolean("enable-teleport-sound");
     }
 
-    public boolean getEnableTeleportMessage()
+    public boolean getENABLE_TELEPORT_MESSAGE()
     {
         return config.getBoolean("enable-teleport-message");
     }
 
-    public String getTeleportMessage()
+    public String getTELEPORT_MESSAGE()
     {
         return config.getString("teleport-message");
     }
 
-    public int getMaxHome()
+    public int getMAX_HOME()
     {
         return config.getInt("max-home");
     }
+
+    //# --- 設定ファイル --- #
+    //
+    //# --- ホームを設定した時　--- #
+    //enable-set-home-sound: true
+    //enable-set-home-message: true
+    //set-home-message: 'ホームを設定しました。'
+    //
+    //# --- ホームにTPした時 ---#
+    //enable-teleport-sound: true
+    //enable-teleport-message: true
+    //teleport-message: 'ホームにTPしました。'
+    //
+    //# --- 最大ホーム数 --- #
+    //max-home: 3
 }

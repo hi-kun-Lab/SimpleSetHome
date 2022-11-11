@@ -17,7 +17,7 @@ public class SetHomeTabCompleterHandler implements TabCompleter
     {
         List<String> list = new ArrayList<>(); //リストを作成
 
-        for (int i = 1; config.getMaxHome() >= i; i++) //ホームの最大値までforで回し
+        for (int i = 1; config.getMAX_HOME() >= i; i++) //ホームの最大値までforで回し
         {
             list.add(String.valueOf(i)); //リストに追加
         }

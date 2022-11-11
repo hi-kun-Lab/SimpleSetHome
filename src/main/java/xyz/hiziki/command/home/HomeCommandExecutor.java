@@ -33,10 +33,10 @@ public class HomeCommandExecutor implements CommandExecutor
             }
             else //サブコマンドが設定されていたら
             {
-                if (Integer.parseInt(args[0]) > config.getMaxHome()
+                if (Integer.parseInt(args[0]) > config.getMAX_HOME()
                         || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.getMaxHome()
+                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.getMAX_HOME()
                             + " までしかありません。"); //エラーをプレイヤーに送信
                 }
                 else //サブコマンドが設定されている数以内だったら
@@ -50,15 +50,15 @@ public class HomeCommandExecutor implements CommandExecutor
                     {
                         teleportHome(p, Integer.parseInt(args[0])); //teleportHomeメソッドに転送
 
-                        if (config.getEnableTeleportMessage()) //設定ファイルでメッセージがtrueになっていたら
+                        if (config.getENABLE_TELEPORT_MESSAGE()) //設定ファイルでメッセージがtrueになっていたら
                         {
-                            if (config.getTeleportMessage() != null) //メッセージがあるかどうかを確認して
+                            if (config.getTELEPORT_MESSAGE() != null) //メッセージがあるかどうかを確認して
                             {
                                 new Prefix(p, ChatColor.AQUA
-                                        + config.getTeleportMessage()); //プレイヤーに送信する
+                                        + config.getTELEPORT_MESSAGE()); //プレイヤーに送信する
                             }
                         }
-                        if (config.getEnableTeleportSound()) //効果音を送信
+                        if (config.getENABLE_TELEPORT_SOUND()) //効果音を送信
                         {
                             p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1); //再生
                         }
