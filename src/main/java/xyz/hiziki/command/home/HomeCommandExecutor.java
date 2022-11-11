@@ -35,6 +35,7 @@ public class HomeCommandExecutor implements CommandExecutor
             {
                 sender.sendMessage("コマンドを実行出来るのはプレイヤーのみです。");
             }
+            return false;
         }
         else //プレイヤーだったら
         {

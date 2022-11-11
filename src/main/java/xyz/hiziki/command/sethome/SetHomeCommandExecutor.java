@@ -5,6 +5,7 @@ import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,7 +27,15 @@ public class SetHomeCommandExecutor implements CommandExecutor
     {
         if (!(sender instanceof Player p)) //プレイヤーかどうかを確認 - プレイヤーじゃなかったら
         {
-            plugin.getLogger().info("コマンドを実行出来るのはプレイヤーのみです。"); //エラーをコマンド実行者に送信
+            if (sender instanceof ConsoleCommandSender)
+            {
+                plugin.getLogger().info("コマンドを実行出来るのはプレイヤーのみです。"); //エラーをコンソールに送信
+            }
+            else
+            {
+                sender.sendMessage("コマンドを実行出来るのはプレイヤーのみです。");
+            }
+            return false;
         }
         else //プレイヤーだったら
         {
