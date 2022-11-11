@@ -22,7 +22,6 @@ public class HomeCommandExecutor implements CommandExecutor
 
     private final ConfigFile config = new ConfigFile();
 
-    @SuppressWarnings("NullableProblems")
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {

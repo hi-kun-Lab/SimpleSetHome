@@ -21,7 +21,6 @@ public class SetHomeCommandExecutor implements CommandExecutor
 
     private final ConfigFile config = new ConfigFile();
 
-    @SuppressWarnings("NullableProblems")
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -70,7 +69,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
 
     private void setHome(Player p, int num) //ホーム設定メソッド
     {
-        homes.set("Homes." + p.getUniqueId() + "." + num + ".World", p.getLocation());
+        homes.set("Homes." + p.getUniqueId() + "." + num + ".Location", p.getLocation());
 
         new SaveFile(); //ファイルを保存
 
@@ -79,5 +78,12 @@ public class SetHomeCommandExecutor implements CommandExecutor
         //  7aa912df-eeed-49d6-814e-5c8994d527f3:
         //    '1':
         //    location:
+        //      ==: org.bukkit.Location
+        //      world: world
+        //      x: 214.30000001192093
+        //      y: 65.0
+        //      z: -95.69999998807907
+        //      pitch: 16.300346
+        //      yaw: -186.54565
     }
 }
