@@ -5,10 +5,8 @@ import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 import xyz.hiziki.Main;
 import xyz.hiziki.config.ConfigFile;
 import xyz.hiziki.util.Prefix;
@@ -16,8 +14,6 @@ import xyz.hiziki.util.SaveFile;
 
 public class SetHomeCommandExecutor implements CommandExecutor
 {
-    private final JavaPlugin plugin = Main.getPlugin();
-
     private final YamlConfiguration homes = Main.getHomes();
 
     private final ConfigFile config = new ConfigFile();
@@ -27,15 +23,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
     {
         if (!(sender instanceof Player p)) //プレイヤーかどうかを確認 - プレイヤーじゃなかったら
         {
-            if (sender instanceof ConsoleCommandSender)
-            {
-                plugin.getLogger().info("コマンドを実行出来るのはプレイヤーのみです。"); //エラーをコンソールに送信
-            }
-            else
-            {
-                sender.sendMessage("コマンドを実行出来るのはプレイヤーのみです。");
-            }
-            return false;
+            sender.sendMessage("コマンドを実行出来るのはプレイヤーのみです。"); //エラーを送信
         }
         else //プレイヤーだったら
         {
@@ -64,7 +52,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
                     }
                     if (config.getEnableSetHomeSound()) //効果音を再生
                     {
-                        p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                        p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1); //再生
                     }
                 }
             }
@@ -74,9 +62,9 @@ public class SetHomeCommandExecutor implements CommandExecutor
 
     private void setHome(Player p, int num) //ホーム設定メソッド
     {
-        homes.set("Homes." + p.getUniqueId() + "." + num + ".Location", p.getLocation());
+        homes.set("Homes." + p.getUniqueId() + "." + num + ".Location", p.getLocation()); //ホームを設定
 
-        new SaveFile(); //ファイルを保存
+        new SaveFile(); //設定したファイルを保存
 
         //こんな感じで保存される
         //Homes:
