@@ -48,7 +48,8 @@ public class SetHomeCommandExecutor implements CommandExecutor
                 if (Integer.parseInt(args[0]) > config.getMaxHome()
                         || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.getMaxHome() + " までしかありません。");
+                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.getMaxHome() + //エラーを
+                            " までしかありません。");
                 }
                 else //サブコマンドが設定されている数以内だったら
                 {
