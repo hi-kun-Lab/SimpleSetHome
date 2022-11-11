@@ -6,7 +6,6 @@ import org.bukkit.command.TabCompleter;
 import xyz.hiziki.config.ConfigFile;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class HomeTabCompleterHandler implements TabCompleter
@@ -16,14 +15,12 @@ public class HomeTabCompleterHandler implements TabCompleter
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args)
     {
-        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<>(); //リストを作成
 
-        for (int i = 1; config.getMaxHome() >= i; i++)
+        for (int i = 1; config.getMaxHome() >= i; i++) //ホームの最大値までforで回し
         {
-            list.add(String.valueOf(i));
+            list.add(String.valueOf(i)); //リストに追加
         }
-
-        Collections.sort(list);
-        return list;
+        return list; //listを返す
     }
 }
