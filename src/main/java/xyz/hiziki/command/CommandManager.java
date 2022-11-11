@@ -16,6 +16,6 @@ public class CommandManager
         Objects.requireNonNull(plugin.getCommand("home")).setTabCompleter(new HomeTabCompleterHandler());
 
         Objects.requireNonNull(plugin.getCommand("setHome")).setExecutor(new SetHomeCommandExecutor());
-        Objects.requireNonNull(plugin.getCommand("sethome")).setTabCompleter(new SetHomeTabCompleterHandler());
+        Objects.requireNonNull(plugin.getCommand("setHome")).setTabCompleter(new SetHomeTabCompleterHandler());
     }
 }
