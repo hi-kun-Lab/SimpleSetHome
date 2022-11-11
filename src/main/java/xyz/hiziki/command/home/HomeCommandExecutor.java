@@ -36,7 +36,7 @@ public class HomeCommandExecutor implements CommandExecutor
                 if (Integer.parseInt(args[0]) > config.getMaxHome()
                         || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + plugin.getConfig().getInt("max-home")
+                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.getMaxHome()
                             + " までしかありません。"); //エラーをプレイヤーに送信
                 }
                 else //サブコマンドが設定されている数以内だったら
