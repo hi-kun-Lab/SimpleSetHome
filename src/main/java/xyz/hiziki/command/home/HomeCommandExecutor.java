@@ -20,6 +20,8 @@ public class HomeCommandExecutor implements CommandExecutor
 
     private final ConfigFile config = new ConfigFile();
 
+    private int count;
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -68,14 +70,23 @@ public class HomeCommandExecutor implements CommandExecutor
 
     private void teleportCountDown(Player p, int num)
     {
+        count = config.getTELEPORT_DELAY();
+
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                teleportHome(p, num);
+                if (count <= 0)
+                {
+                    teleportHome(p, num);
+                    cancel();
+                    return;
+                }
+                count--;
+                p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5F, 0.5F);
             }
-        }.runTaskLater(plugin, 20L * config.getTELEPORT_DELAY());
+        }.runTaskTimer(plugin, 0, 20);
     }
 
     private void teleportHome(Player p, int num)

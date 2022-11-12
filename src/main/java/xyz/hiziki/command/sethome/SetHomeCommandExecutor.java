@@ -22,6 +22,8 @@ public class SetHomeCommandExecutor implements CommandExecutor
 
     private final ConfigFile config = new ConfigFile();
 
+    private int count;
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -62,14 +64,23 @@ public class SetHomeCommandExecutor implements CommandExecutor
 
     private void setHomeCountDown(Player p, int num)
     {
+        count = config.getSET_HOME_DELAY();
+
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                setHome(p, num);
+                if (count <= 0)
+                {
+                    setHome(p, num);
+                    cancel();
+                    return;
+                }
+                count--;
+                p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5F, 0.5F); //再生
             }
-        }.runTaskLater(plugin, 20L * config.getSET_HOME_DELAY());
+        }.runTaskTimer(plugin, 0, 20);
     }
 
     private void setHome(Player p, int num) //ホーム設定メソッド
