@@ -54,7 +54,6 @@ public class SetHomeCommandExecutor implements CommandExecutor
                     {
                         setHome(p, homeNum);
                     }
-                    setHome(p, homeNum); //setHomeメソッドでhomeを設定し
                 }
             }
         }
