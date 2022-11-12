@@ -49,18 +49,6 @@ public class HomeCommandExecutor implements CommandExecutor
                     else //ホームが設定されていたら
                     {
                         teleportHome(p, homeNum); //teleportHomeメソッドに転送
-
-                        if (config.getENABLE_TELEPORT_MESSAGE()) //設定ファイルでメッセージがtrueになっていたら
-                        {
-                            if (config.getTELEPORT_MESSAGE() != null) //メッセージがあるかどうかを確認して
-                            {
-                                new Prefix(p, ChatColor.AQUA + config.getTELEPORT_MESSAGE()); //プレイヤーに送信する
-                            }
-                        }
-                        if (config.getENABLE_TELEPORT_SOUND()) //効果音を送信
-                        {
-                            p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1); //再生
-                        }
                     }
                 }
             }
@@ -71,5 +59,18 @@ public class HomeCommandExecutor implements CommandExecutor
     private void teleportHome(Player p, int num)
     {
         p.teleport(homes.getLocation("Homes." + p.getUniqueId() + "." + num + ".Location")); // ホームにテレポート
+
+
+        if (config.getENABLE_TELEPORT_MESSAGE()) //設定ファイルでメッセージがtrueになっていたら
+        {
+            if (config.getTELEPORT_MESSAGE() != null) //メッセージがあるかどうかを確認して
+            {
+                new Prefix(p, ChatColor.AQUA + config.getTELEPORT_MESSAGE()); //プレイヤーに送信する
+            }
+        }
+        if (config.getENABLE_TELEPORT_SOUND()) //効果音を送信
+        {
+            p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1); //再生
+        }
     }
 }
