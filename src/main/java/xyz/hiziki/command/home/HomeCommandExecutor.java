@@ -82,7 +82,6 @@ public class HomeCommandExecutor implements CommandExecutor
     {
         p.teleport(homes.getLocation("Homes." + p.getUniqueId() + "." + num + ".Location")); // ホームにテレポート
 
-
         if (config.getENABLE_TELEPORT_MESSAGE()) //設定ファイルでメッセージがtrueになっていたら
         {
             if (config.getTELEPORT_MESSAGE() != null) //メッセージがあるかどうかを確認して
