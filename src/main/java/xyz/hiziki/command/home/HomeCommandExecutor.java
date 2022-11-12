@@ -6,12 +6,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import xyz.hiziki.Main;
 import xyz.hiziki.config.ConfigFile;
 import xyz.hiziki.util.Prefix;
 
 public class HomeCommandExecutor implements CommandExecutor
 {
+    private final JavaPlugin plugin = Main.getPlugin();
+
     private final YamlConfiguration homes = Main.getHomes();
 
     private final ConfigFile config = new ConfigFile();
@@ -43,17 +47,35 @@ public class HomeCommandExecutor implements CommandExecutor
                 {
                     if (homes.getString("Homes." + p.getUniqueId() + "." + homeNum) == null)
                     {
-                        new Prefix(p, ChatColor.RED + "ホーム " + homeNum
-                                + " は設定されていません。"); //ホームが設定されていない場合エラーをプレイヤーに送信
+                        new Prefix(p, ChatColor.RED + "ホーム " + homeNum + " は設定されていません。"); //エラーを送信
                     }
                     else //ホームが設定されていたら
                     {
-                        teleportHome(p, homeNum); //teleportHomeメソッドに転送
+                        if (config.getENABLE_TELEPORT_DELAY())
+                        {
+                            teleportCountDown(p, homeNum);
+                        }
+                        else
+                        {
+                            teleportHome(p, homeNum); //teleportHomeメソッドに転送
+                        }
                     }
                 }
             }
         }
         return true; //return false だったら実行されずにチャットとして送信されることになる。
+    }
+
+    private void teleportCountDown(Player p, int num)
+    {
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                teleportHome(p, num);
+            }
+        }.runTaskLater(plugin, 20L * config.getTELEPORT_DELAY());
     }
 
     private void teleportHome(Player p, int num)

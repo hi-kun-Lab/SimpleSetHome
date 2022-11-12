@@ -7,6 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import xyz.hiziki.Main;
 import xyz.hiziki.config.ConfigFile;
 import xyz.hiziki.util.Prefix;
@@ -14,6 +16,8 @@ import xyz.hiziki.util.SaveFile;
 
 public class SetHomeCommandExecutor implements CommandExecutor
 {
+    private final JavaPlugin plugin = Main.getPlugin();
+
     private final YamlConfiguration homes = Main.getHomes();
 
     private final ConfigFile config = new ConfigFile();
@@ -42,11 +46,31 @@ public class SetHomeCommandExecutor implements CommandExecutor
                 }
                 else //サブコマンドが設定されている数以内だったら
                 {
+                    if (config.getENABLE_SET_HOME_DELAY())
+                    {
+                        setHomeCountDown(p, homeNum);
+                    }
+                    else
+                    {
+                        setHome(p, homeNum);
+                    }
                     setHome(p, homeNum); //setHomeメソッドでhomeを設定し
                 }
             }
         }
         return true; //return false だったら実行されずにチャットとして送信されることになる。
+    }
+
+    private void setHomeCountDown(Player p, int num)
+    {
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                setHome(p, num);
+            }
+        }.runTaskLater(plugin, 20L * config.getSET_HOME_DELAY());
     }
 
     private void setHome(Player p, int num) //ホーム設定メソッド
