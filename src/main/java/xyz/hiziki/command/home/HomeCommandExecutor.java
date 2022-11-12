@@ -10,8 +10,6 @@ import xyz.hiziki.Main;
 import xyz.hiziki.config.ConfigFile;
 import xyz.hiziki.util.Prefix;
 
-import java.util.Objects;
-
 public class HomeCommandExecutor implements CommandExecutor
 {
     private final YamlConfiguration homes = Main.getHomes();
@@ -33,29 +31,30 @@ public class HomeCommandExecutor implements CommandExecutor
             }
             else //サブコマンドが設定されていたら
             {
-                if (Integer.parseInt(args[0]) > config.getMAX_HOME()
-                        || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
+                int homeNum = Integer.parseInt(args[0]);
+
+                //サブコマンドが設定されている数を超えている or 0だったら
+                if (homeNum > config.getMAX_HOME() || homeNum == 0)
                 {
                     new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.getMAX_HOME()
                             + " までしかありません。"); //エラーをプレイヤーに送信
                 }
                 else //サブコマンドが設定されている数以内だったら
                 {
-                    if (homes.getString("Homes." + p.getUniqueId() + "." + Integer.parseInt(args[0])) == null)
+                    if (homes.getString("Homes." + p.getUniqueId() + "." + homeNum) == null)
                     {
-                        new Prefix(p, ChatColor.RED + "ホーム " + Integer.parseInt(args[0])
+                        new Prefix(p, ChatColor.RED + "ホーム " + homeNum
                                 + " は設定されていません。"); //ホームが設定されていない場合エラーをプレイヤーに送信
                     }
                     else //ホームが設定されていたら
                     {
-                        teleportHome(p, Integer.parseInt(args[0])); //teleportHomeメソッドに転送
+                        teleportHome(p, homeNum); //teleportHomeメソッドに転送
 
                         if (config.getENABLE_TELEPORT_MESSAGE()) //設定ファイルでメッセージがtrueになっていたら
                         {
                             if (config.getTELEPORT_MESSAGE() != null) //メッセージがあるかどうかを確認して
                             {
-                                new Prefix(p, ChatColor.AQUA
-                                        + config.getTELEPORT_MESSAGE()); //プレイヤーに送信する
+                                new Prefix(p, ChatColor.AQUA + config.getTELEPORT_MESSAGE()); //プレイヤーに送信する
                             }
                         }
                         if (config.getENABLE_TELEPORT_SOUND()) //効果音を送信
@@ -71,7 +70,6 @@ public class HomeCommandExecutor implements CommandExecutor
 
     private void teleportHome(Player p, int num)
     {
-        p.teleport(Objects.requireNonNull(
-                homes.getLocation("Homes." + p.getUniqueId() + "." + num + ".Location"))); // ホームにテレポート
+        p.teleport(homes.getLocation("Homes." + p.getUniqueId() + "." + num + ".Location")); // ホームにテレポート
     }
 }

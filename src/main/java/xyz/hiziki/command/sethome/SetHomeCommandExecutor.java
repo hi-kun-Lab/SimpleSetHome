@@ -33,15 +33,16 @@ public class SetHomeCommandExecutor implements CommandExecutor
             }
             else //サブコマンドが設定されていたら
             {
-                if (Integer.parseInt(args[0]) > config.getMAX_HOME()
-                        || Integer.parseInt(args[0]) == 0) //サブコマンドが設定されている数を超えている or 0だったら
+                int homeNum = Integer.parseInt(args[0]);
+
+                if (homeNum > config.getMAX_HOME() || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.getMAX_HOME() + //エラーを
-                            " までしかありません。");
+                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.getMAX_HOME() +
+                            " までしかありません。"); //エラーをプレイヤーに送信
                 }
                 else //サブコマンドが設定されている数以内だったら
                 {
-                    setHome(p, Integer.parseInt(args[0])); //setHomeメソッドでhomeを設定し
+                    setHome(p, homeNum); //setHomeメソッドでhomeを設定し
 
                     if (config.getENABLE_SET_HOME_MESSAGE()) //設定ファイルでメッセージがtrueになっていたら
                     {
