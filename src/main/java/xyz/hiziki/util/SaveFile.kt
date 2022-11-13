@@ -9,8 +9,10 @@ class SaveFile
 {
     init  //yml保存
     {
-        val homesFile : File = Main.Companion.getHomesFile()
-        val homes : YamlConfiguration = Main.Companion.getHomes()
+        val homesFile : File = Main.homesFile!!
+
+        val homes : YamlConfiguration = Main.homes!!
+
         try
         {
             homes.save(homesFile)
