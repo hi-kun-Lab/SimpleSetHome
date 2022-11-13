@@ -15,13 +15,20 @@ import xyz.hiziki.util.Prefix
 
 class HomeCommandExecutor : CommandExecutor
 {
-    private val plugin : JavaPlugin? = Main.Companion.getPlugin()
-    private val homes : YamlConfiguration? = Main.Companion.getHomes()
+    private val plugin : JavaPlugin? = Main.plugin
+
+    private val homes : YamlConfiguration? = Main.homes
+
     private val config = ConfigFile()
+
     private var count = 0
+
     private var x = 0.0
+
     private var y = 0.0
+
     private var z = 0.0
+
     override fun onCommand(sender : CommandSender, command : Command, label : String, args : Array<String>) : Boolean
     {
         if (sender !is Player) //プレイヤーかどうかを確認 - プレイヤーじゃなかったら
@@ -30,33 +37,35 @@ class HomeCommandExecutor : CommandExecutor
         }
         else  //プレイヤーだったら
         {
-            val p = sender
-            if (args.size == 0) //args が0だったら = サブコマンドが設定されていなかったら
+            if (args.isEmpty()) //args が0だったら = サブコマンドが設定されていなかったら
             {
-                Prefix(p, ChatColor.RED.toString() + "サブコマンドが設定されていません。") //エラーをプレイヤーに送信
+                Prefix(sender, ChatColor.RED.toString() + "サブコマンドが設定されていません。") //エラーをプレイヤーに送信
             }
             else  //サブコマンドが設定されていたら
             {
                 val homeNum = args[0].toInt()
-                if (homeNum > config.maX_HOME || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
+
+                if (homeNum > config.maxHome || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    Prefix(p, ChatColor.RED.toString() + "サブコマンドは 1~" + config.maX_HOME + " までしかありません。")
+                    Prefix(sender, ChatColor.RED.toString() + "サブコマンドは 1~" +
+                            config.maxHome + " までしかありません。") //エラーをプレイヤーに送信
                 }
                 else  //サブコマンドが設定されている数以内だったら
                 {
-                    if (homes!!.getString("Homes." + p.uniqueId + "." + homeNum) == null)
+                    if (homes!!.getString("Homes." + sender.uniqueId + "." + homeNum) == null)
                     {
-                        Prefix(p, ChatColor.RED.toString() + "ホーム " + homeNum + " は設定されていません。") //エラーを送信
+                        Prefix(sender, ChatColor.RED.toString() + "ホーム " + homeNum +
+                                " は設定されていません。") //エラーをプレイヤーに送信
                     }
                     else  //ホームが設定されていたら
                     {
-                        if (config.enablE_TELEPORT_DELAY)
+                        if (config.enableTeleportDelay)
                         {
-                            teleportCountDown(p, homeNum)
+                            teleportCountDown(sender, homeNum) //teleportCountDownメソッドに転送
                         }
                         else
                         {
-                            teleportHome(p, homeNum) //teleportHomeメソッドに転送
+                            teleportHome(sender, homeNum) //teleportHomeメソッドに転送
                         }
                     }
                 }
@@ -67,15 +76,17 @@ class HomeCommandExecutor : CommandExecutor
 
     private fun teleportCountDown(p : Player, num : Int)
     {
-        count = config.teleporT_DELAY
+        count = config.teleportDelay
+
         x = p.location.x
         y = p.location.y
         z = p.location.z
+
         object : BukkitRunnable()
         {
             override fun run()
             {
-                if (config.movE_CANCEL)
+                if (config.moveCancel)
                 {
                     if (x == p.location.x && y == p.location.y && z == p.location.z)
                     {
@@ -112,14 +123,14 @@ class HomeCommandExecutor : CommandExecutor
     private fun teleportHome(p : Player, num : Int)
     {
         p.teleport(homes!!.getLocation("Homes." + p.uniqueId + "." + num + ".Location")!!) // ホームにテレポート
-        if (config.enablE_TELEPORT_MESSAGE) //設定ファイルでメッセージがtrueになっていたら
+        if (config.enableTeleportMessage) //設定ファイルでメッセージがtrueになっていたら
         {
-            if (config.teleporT_MESSAGE != null) //メッセージがあるかどうかを確認して
+            if (config.teleportMessage != null) //メッセージがあるかどうかを確認して
             {
-                Prefix(p, ChatColor.AQUA.toString() + config.teleporT_MESSAGE) //プレイヤーに送信する
+                Prefix(p, ChatColor.AQUA.toString() + config.teleportMessage) //プレイヤーに送信する
             }
         }
-        if (config.enablE_TELEPORT_SOUND) //効果音を送信
+        if (config.enableTeleportSound) //効果音を送信
         {
             p.playSound(p.location, Sound.ENTITY_ENDERMAN_TELEPORT, 1f, 1f) //再生
         }

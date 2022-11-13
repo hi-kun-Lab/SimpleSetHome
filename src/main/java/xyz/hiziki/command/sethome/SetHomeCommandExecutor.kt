@@ -16,13 +16,20 @@ import xyz.hiziki.util.SaveFile
 
 class SetHomeCommandExecutor : CommandExecutor
 {
-    private val plugin : JavaPlugin? = Main.Companion.getPlugin()
-    private val homes : YamlConfiguration? = Main.Companion.getHomes()
+    private val plugin : JavaPlugin? = Main.plugin
+
+    private val homes : YamlConfiguration? = Main.homes
+
     private val config = ConfigFile()
+
     private var count = 0
+
     private var x = 0.0
+
     private var y = 0.0
+
     private var z = 0.0
+
     override fun onCommand(sender : CommandSender, command : Command, label : String, args : Array<String>) : Boolean
     {
         if (sender !is Player) //プレイヤーかどうかを確認 - プレイヤーじゃなかったら
@@ -31,27 +38,26 @@ class SetHomeCommandExecutor : CommandExecutor
         }
         else  //プレイヤーだったら
         {
-            val p = sender
-            if (args.size == 0) //args が0だったら = サブコマンドが設定されていなかったら
+            if (args.isEmpty()) //args が0だったら = サブコマンドが設定されていなかったら
             {
-                Prefix(p, ChatColor.RED.toString() + "サブコマンドが設定されていません。") //エラーをプレイヤーに送信
+                Prefix(sender, ChatColor.RED.toString() + "サブコマンドが設定されていません。") //エラーをプレイヤーに送信
             }
             else  //サブコマンドが設定されていたら
             {
                 val homeNum = args[0].toInt()
-                if (homeNum > config.maX_HOME || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
+                if (homeNum > config.maxHome || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    Prefix(p, ChatColor.RED.toString() + "サブコマンドは 1~" + config.maX_HOME + " までしかありません。") //エラーをプレイヤーに送信
+                    Prefix(sender, ChatColor.RED.toString() + "サブコマンドは 1~" + config.maxHome + " までしかありません。") //エラーをプレイヤーに送信
                 }
                 else  //サブコマンドが設定されている数以内だったら
                 {
-                    if (config.enablE_SET_HOME_DELAY)
+                    if (config.enableSetHomeDelay)
                     {
-                        setHomeCountDown(p, homeNum)
+                        setHomeCountDown(sender, homeNum)
                     }
                     else
                     {
-                        setHome(p, homeNum)
+                        setHome(sender, homeNum)
                     }
                 }
             }
@@ -61,15 +67,17 @@ class SetHomeCommandExecutor : CommandExecutor
 
     private fun setHomeCountDown(p : Player, num : Int)
     {
-        count = config.seT_HOME_DELAY
+        count = config.setHomeDelay
+
         x = p.location.x
         y = p.location.y
         z = p.location.z
+
         object : BukkitRunnable()
         {
             override fun run()
             {
-                if (config.movE_CANCEL)
+                if (config.moveCancel)
                 {
                     if (x == p.location.x && y == p.location.y && z == p.location.z)
                     {
@@ -106,17 +114,19 @@ class SetHomeCommandExecutor : CommandExecutor
     private fun setHome(p : Player, num : Int) //ホーム設定メソッド
     {
         homes!!["Homes." + p.uniqueId + "." + num + ".Location"] = p.location //ホームを設定
-        if (config.enablE_SET_HOME_MESSAGE) //設定ファイルでメッセージがtrueになっていたら
+
+        if (config.enableSetHomeMessage) //設定ファイルでメッセージがtrueになっていたら
         {
-            if (config.seT_HOME_MESSAGE != null) //メッセージがあるかどうかを確認して
+            if (config.setHomeMessage != null) //メッセージがあるかどうかを確認して
             {
-                Prefix(p, ChatColor.AQUA.toString() + config.seT_HOME_MESSAGE) //プレイヤーに送信する
+                Prefix(p, ChatColor.AQUA.toString() + config.setHomeMessage) //プレイヤーに送信する
             }
         }
-        if (config.enablE_SET_HOME_SOUND) //効果音を再生
+        if (config.enableSetHomeSound) //効果音を再生
         {
             p.playSound(p.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f) //再生
         }
+
         SaveFile() //設定したファイルを保存
 
         //こんな感じで保存される
