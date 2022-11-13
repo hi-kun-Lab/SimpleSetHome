@@ -24,6 +24,12 @@ public class SetHomeCommandExecutor implements CommandExecutor
 
     private int count;
 
+    private double x;
+
+    private double y;
+
+    private double z;
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -66,19 +72,31 @@ public class SetHomeCommandExecutor implements CommandExecutor
     {
         count = config.getSET_HOME_DELAY();
 
+        x = p.getLocation().getX();
+        y = p.getLocation().getY();
+        z = p.getLocation().getZ();
+
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                if (count <= 0)
+                if (x == p.getLocation().getX() && y == p.getLocation().getY() && z == p.getLocation().getZ())
                 {
-                    setHome(p, num);
-                    cancel();
-                    return;
+                    if (count <= 0)
+                    {
+                        setHome(p, num);
+                        cancel();
+                        return;
+                    }
+                    count--;
+                    p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5F, 0.5F); //再生
                 }
-                count--;
-                p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5F, 0.5F); //再生
+                else
+                {
+                    new Prefix(p, ChatColor.RED + "移動したためホームの設定がキャンセルされました。"); //プレイヤーに送信
+                    cancel(); //スケジューラーから抜ける
+                }
             }
         }.runTaskTimer(plugin, 0, 20);
     }

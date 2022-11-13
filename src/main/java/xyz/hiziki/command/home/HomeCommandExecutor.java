@@ -22,6 +22,12 @@ public class HomeCommandExecutor implements CommandExecutor
 
     private int count;
 
+    private double x;
+
+    private double y;
+
+    private double z;
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -72,19 +78,31 @@ public class HomeCommandExecutor implements CommandExecutor
     {
         count = config.getTELEPORT_DELAY();
 
+        x = p.getLocation().getX();
+        y = p.getLocation().getY();
+        z = p.getLocation().getZ();
+
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                if (count <= 0)
+                if (x == p.getLocation().getX() && y == p.getLocation().getY() && z == p.getLocation().getZ())
                 {
-                    teleportHome(p, num);
-                    cancel();
-                    return;
+                    if (count <= 0)
+                    {
+                        teleportHome(p, num);
+                        cancel();
+                        return;
+                    }
+                    count--;
+                    p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5F, 0.5F);
                 }
-                count--;
-                p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5F, 0.5F);
+                else
+                {
+                    new Prefix(p, ChatColor.RED + "移動したためテレポートがキャンセルされました。"); //プレイヤーに送信
+                    cancel(); //スケジューラーから抜ける
+                }
             }
         }.runTaskTimer(plugin, 0, 20);
     }
