@@ -1,26 +1,23 @@
-package xyz.hiziki.util;
+package xyz.hiziki.util
 
-import org.bukkit.configuration.file.YamlConfiguration;
-import xyz.hiziki.Main;
+import org.bukkit.configuration.file.YamlConfiguration
+import xyz.hiziki.Main
+import java.io.File
+import java.io.IOException
 
-import java.io.File;
-import java.io.IOException;
-
-public class SaveFile
+class SaveFile
 {
-    public SaveFile() //yml保存
+    init  //yml保存
     {
-        File homesFile = Main.getHomesFile();
-
-        YamlConfiguration homes = Main.getHomes();
-
+        val homesFile : File = Main.Companion.getHomesFile()
+        val homes : YamlConfiguration = Main.Companion.getHomes()
         try
         {
-            homes.save(homesFile);
+            homes.save(homesFile)
         }
-        catch(IOException e)
+        catch (e : IOException)
         {
-            e.printStackTrace();
+            e.printStackTrace()
         }
     }
 }

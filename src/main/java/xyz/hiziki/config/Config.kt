@@ -1,118 +1,76 @@
-package xyz.hiziki.config;
+package xyz.hiziki.config
 
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.configuration.file.FileConfiguration
+import org.bukkit.plugin.java.JavaPlugin
 
-public class Config
+class Config(private val plugin : JavaPlugin)
 {
-    private final JavaPlugin plugin;
+    private var config : FileConfiguration? = null
 
-    private FileConfiguration config;
-
-    public Config(JavaPlugin pl)
+    init
     {
-        plugin = pl;
-        load();
+        load()
     }
 
-    public void load()
+    fun load()
     {
-        plugin.saveDefaultConfig(); // 設定ファイルを保存
-
+        plugin.saveDefaultConfig() // 設定ファイルを保存
         if (config != null) //configファイルがあったら
         {
-            plugin.reloadConfig();
+            plugin.reloadConfig()
         }
-
-        config = plugin.getConfig();
-
-        if (!config.contains("enable-set-home-sound") || !config.contains("enable-teleport-sound") ||
-                !config.contains("enable-set-home-message") || !config.contains("enable-teleport-message") ||
-                !config.contains("set-home-message") || !config.contains("teleport-message") ||
-                !config.contains("enable-set-home-delay") || !config.contains("enable-teleport-delay") ||
-                !config.contains("set-home-delay(s)") || !config.contains("teleport-delay(s)") ||
-                !config.contains("max-home") || !config.contains("move-cancel"))
+        config = plugin.config
+        if (!config!!.contains("enable-set-home-sound") || !config!!.contains("enable-teleport-sound") || !config!!.contains("enable-set-home-message") || !config!!.contains("enable-teleport-message") || !config!!.contains("set-home-message") || !config!!.contains("teleport-message") || !config!!.contains("enable-set-home-delay") || !config!!.contains("enable-teleport-delay") || !config!!.contains("set-home-delay(s)") || !config!!.contains("teleport-delay(s)") || !config!!.contains("max-home") || !config!!.contains("move-cancel"))
         {
-            plugin.getLogger().info("config.yml にエラーが起こっています。");
+            plugin.logger.info("config.yml にエラーが起こっています。")
         }
-
-        if (!config.isBoolean("enable-set-home-sound"))
+        if (!config!!.isBoolean("enable-set-home-sound"))
         {
-            plugin.getLogger().info("enable-set-home-soundがBoolean形じゃありません。");
+            plugin.logger.info("enable-set-home-soundがBoolean形じゃありません。")
         }
-
-        if (!config.isBoolean("enable-set-home-message"))
+        if (!config!!.isBoolean("enable-set-home-message"))
         {
-            plugin.getLogger().info("enable-set-home-messageがBoolean形じゃありません。");
+            plugin.logger.info("enable-set-home-messageがBoolean形じゃありません。")
         }
-
-        if (!config.isString("set-home-message"))
+        if (!config!!.isString("set-home-message"))
         {
-            plugin.getLogger().info("set-home-messageがString形じゃありません。");
+            plugin.logger.info("set-home-messageがString形じゃありません。")
         }
-
-        if (!config.isBoolean("enable-set-home-delay"))
+        if (!config!!.isBoolean("enable-set-home-delay"))
         {
-            plugin.getLogger().info("enable-set-home-delayがBoolean形じゃありません。");
+            plugin.logger.info("enable-set-home-delayがBoolean形じゃありません。")
         }
-
-        if (!config.isInt("set-home-delay(s)"))
+        if (!config!!.isInt("set-home-delay(s)"))
         {
-            plugin.getLogger().info("set-home-delay(s)がInt形じゃありません。");
+            plugin.logger.info("set-home-delay(s)がInt形じゃありません。")
         }
-
-        if (!config.isBoolean("enable-teleport-sound"))
+        if (!config!!.isBoolean("enable-teleport-sound"))
         {
-            plugin.getLogger().info("enable-teleport-soundがBoolean形じゃありません。");
+            plugin.logger.info("enable-teleport-soundがBoolean形じゃありません。")
         }
-
-        if (!config.isBoolean("enable-teleport-message"))
+        if (!config!!.isBoolean("enable-teleport-message"))
         {
-            plugin.getLogger().info("enable-teleport-messageがBoolean形じゃありません。");
+            plugin.logger.info("enable-teleport-messageがBoolean形じゃありません。")
         }
-
-        if (!config.isString("teleport-message"))
+        if (!config!!.isString("teleport-message"))
         {
-            plugin.getLogger().info("teleport-messageがString形じゃありません。");
+            plugin.logger.info("teleport-messageがString形じゃありません。")
         }
-
-        if (!config.isBoolean("enable-teleport-delay"))
+        if (!config!!.isBoolean("enable-teleport-delay"))
         {
-            plugin.getLogger().info("enable-teleport-delayがBoolean形じゃありません。");
+            plugin.logger.info("enable-teleport-delayがBoolean形じゃありません。")
         }
-
-        if (!config.isInt("teleport-delay(s)"))
+        if (!config!!.isInt("teleport-delay(s)"))
         {
-            plugin.getLogger().info("teleport-delay(s)がInt形じゃありません。");
+            plugin.logger.info("teleport-delay(s)がInt形じゃありません。")
         }
-
-        if (!config.isInt("max-home"))
+        if (!config!!.isInt("max-home"))
         {
-            plugin.getLogger().info("max-homeがInt形じゃありません。");
+            plugin.logger.info("max-homeがInt形じゃありません。")
         }
-
-        if (!config.isBoolean("move-cancel"))
+        if (!config!!.isBoolean("move-cancel"))
         {
-            plugin.getLogger().info("move-cancelがBoolean形じゃありません。");
+            plugin.logger.info("move-cancelがBoolean形じゃありません。")
         }
     }
 }
-//# --- 設定ファイル --- #
-//
-//# --- ホーム設定時　--- #
-//enable-set-home-sound: true
-//enable-set-home-message: true
-//set-home-message: 'ホームを設定しました。'
-//enable-set-home-delay: false
-//set-home-delay(s): 5
-//
-//# --- ホームにTP時 ---#
-//enable-teleport-sound: true
-//enable-teleport-message: true
-//teleport-message: 'ホームにTPしました。'
-//enable-teleport-delay: true
-//teleport-delay(s): 5
-//
-//# --- 共通設定 --- #
-//max-home: 3
-//move-cancel: true

@@ -1,26 +1,22 @@
-package xyz.hiziki.command.sethome;
+package xyz.hiziki.command.sethome
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
-import xyz.hiziki.config.ConfigFile;
+import org.bukkit.command.Command
+import org.bukkit.command.CommandSender
+import org.bukkit.command.TabCompleter
+import xyz.hiziki.config.ConfigFile
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SetHomeTabCompleterHandler implements TabCompleter
+class SetHomeTabCompleterHandler : TabCompleter
 {
-    private final ConfigFile config = new ConfigFile();
-
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args)
+    private val config = ConfigFile()
+    override fun onTabComplete(sender : CommandSender, command : Command, label : String, args : Array<String>) : List<String>?
     {
-        List<String> list = new ArrayList<>(); //リストを作成
-
-        for (int i = 1; config.getMAX_HOME() >= i; i++) //ホームの最大値までforで回し
+        val list : MutableList<String> = ArrayList() //リストを作成
+        var i = 1
+        while (config.maX_HOME >= i)
         {
-            list.add(String.valueOf(i)); //リストに追加
+            list.add(i.toString()) //リストに追加
+            i++
         }
-        return list; //listを返す
+        return list //listを返す
     }
 }

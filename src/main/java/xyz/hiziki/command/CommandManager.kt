@@ -1,21 +1,18 @@
-package xyz.hiziki.command;
+package xyz.hiziki.command
 
-import org.bukkit.plugin.java.JavaPlugin;
-import xyz.hiziki.command.home.HomeCommandExecutor;
-import xyz.hiziki.command.home.HomeTabCompleterHandler;
-import xyz.hiziki.command.sethome.SetHomeCommandExecutor;
-import xyz.hiziki.command.sethome.SetHomeTabCompleterHandler;
+import org.bukkit.plugin.java.JavaPlugin
+import xyz.hiziki.command.home.HomeCommandExecutor
+import xyz.hiziki.command.home.HomeTabCompleterHandler
+import xyz.hiziki.command.sethome.SetHomeCommandExecutor
+import xyz.hiziki.command.sethome.SetHomeTabCompleterHandler
 
-import java.util.Objects;
-
-public class CommandManager
+class CommandManager(plugin : JavaPlugin)
 {
-    public CommandManager(JavaPlugin plugin)
+    init
     {
-        Objects.requireNonNull(plugin.getCommand("home")).setExecutor(new HomeCommandExecutor());
-        Objects.requireNonNull(plugin.getCommand("home")).setTabCompleter(new HomeTabCompleterHandler());
-
-        Objects.requireNonNull(plugin.getCommand("setHome")).setExecutor(new SetHomeCommandExecutor());
-        Objects.requireNonNull(plugin.getCommand("setHome")).setTabCompleter(new SetHomeTabCompleterHandler());
+        plugin.getCommand("home")!!.setExecutor(HomeCommandExecutor())
+        plugin.getCommand("home")!!.tabCompleter = HomeTabCompleterHandler()
+        plugin.getCommand("setHome")!!.setExecutor(SetHomeCommandExecutor())
+        plugin.getCommand("setHome")!!.tabCompleter = SetHomeTabCompleterHandler()
     }
 }

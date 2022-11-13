@@ -1,40 +1,38 @@
-package xyz.hiziki.config;
+package xyz.hiziki.config
 
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
-import xyz.hiziki.Main;
+import org.bukkit.plugin.java.JavaPlugin
+import xyz.hiziki.Main
 
-public class ConfigFile
+class ConfigFile
 {
-    private final JavaPlugin plugin = Main.getPlugin();
-
-    private final FileConfiguration config = plugin.getConfig();
-
-    public boolean getENABLE_SET_HOME_SOUND() { return config.getBoolean("enable-set-home-sound"); }
-
-    public boolean getENABLE_SET_HOME_MESSAGE() { return config.getBoolean("enable-set-home-message"); }
-
-    public String getSET_HOME_MESSAGE() { return config.getString("set-home-message"); }
-
-    public boolean getENABLE_SET_HOME_DELAY() { return config.getBoolean("enable-set-home-delay"); }
-
-    public int getSET_HOME_DELAY() { return config.getInt("set-home-delay(s)"); }
-
-    public boolean getENABLE_TELEPORT_SOUND() { return config.getBoolean("enable-teleport-sound"); }
-
-    public boolean getENABLE_TELEPORT_MESSAGE() { return config.getBoolean("enable-teleport-message"); }
-
-    public String getTELEPORT_MESSAGE() { return config.getString("teleport-message"); }
-
-    public boolean getENABLE_TELEPORT_DELAY() { return config.getBoolean("enable-teleport-delay"); }
-
-    public int getTELEPORT_DELAY() { return config.getInt("teleport-delay(s)"); }
-
-    public int getMAX_HOME() { return config.getInt("max-home"); }
-
-    public boolean getMOVE_CANCEL() { return config.getBoolean("move-cancel"); }
+    private val plugin : JavaPlugin? = Main.Companion.getPlugin()
+    private val config = plugin!!.config
+    val eNABLE_SET_HOME_SOUND : Boolean
+        get() = config.getBoolean("enable-set-home-sound")
+    val eNABLE_SET_HOME_MESSAGE : Boolean
+        get() = config.getBoolean("enable-set-home-message")
+    val sET_HOME_MESSAGE : String?
+        get() = config.getString("set-home-message")
+    val eNABLE_SET_HOME_DELAY : Boolean
+        get() = config.getBoolean("enable-set-home-delay")
+    val sET_HOME_DELAY : Int
+        get() = config.getInt("set-home-delay(s)")
+    val eNABLE_TELEPORT_SOUND : Boolean
+        get() = config.getBoolean("enable-teleport-sound")
+    val eNABLE_TELEPORT_MESSAGE : Boolean
+        get() = config.getBoolean("enable-teleport-message")
+    val tELEPORT_MESSAGE : String?
+        get() = config.getString("teleport-message")
+    val eNABLE_TELEPORT_DELAY : Boolean
+        get() = config.getBoolean("enable-teleport-delay")
+    val tELEPORT_DELAY : Int
+        get() = config.getInt("teleport-delay(s)")
+    val mAX_HOME : Int
+        get() = config.getInt("max-home")
 
     //# --- 設定ファイル --- #
+    val mOVE_CANCEL : Boolean
+        get() = config.getBoolean("move-cancel")
     //
     //# --- ホームを設定した時　--- #
     //enable-set-home-sound: true

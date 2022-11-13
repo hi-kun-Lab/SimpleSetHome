@@ -1,12 +1,12 @@
-package xyz.hiziki.util;
+package xyz.hiziki.util
 
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
+import org.bukkit.ChatColor
+import org.bukkit.entity.Player
 
-public class Prefix
+class Prefix(p : Player, msg : String)
 {
-    public Prefix(Player p, String msg)
+    init
     {
-        p.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "SimpleSetHome" + ChatColor.AQUA + "]" + msg);
+        p.sendMessage(ChatColor.AQUA.toString() + "[" + ChatColor.GREEN + "SimpleSetHome" + ChatColor.AQUA + "]" + msg)
     }
 }
