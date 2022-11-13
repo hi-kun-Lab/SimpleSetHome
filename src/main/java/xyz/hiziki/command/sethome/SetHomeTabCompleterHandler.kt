@@ -8,14 +8,15 @@ import xyz.hiziki.config.ConfigFile
 class SetHomeTabCompleterHandler : TabCompleter
 {
     private val config = ConfigFile()
-    override fun onTabComplete(sender : CommandSender, command : Command, label : String, args : Array<String>) : List<String>?
+
+    override fun onTabComplete(sender : CommandSender, command : Command, label : String, args : Array<String>)
+            : List<String>?
     {
         val list : MutableList<String> = ArrayList() //リストを作成
-        var i = 1
-        while (config.maX_HOME >= i)
+
+        for (i in 1..config.maxHome)
         {
             list.add(i.toString()) //リストに追加
-            i++
         }
         return list //listを返す
     }
