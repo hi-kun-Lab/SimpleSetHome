@@ -12,15 +12,23 @@ class Config(private val plugin : JavaPlugin)
         load()
     }
 
-    fun load()
+    private fun load()
     {
         plugin.saveDefaultConfig() // 設定ファイルを保存
+
         if (config != null) //configファイルがあったら
         {
             plugin.reloadConfig()
         }
+
         config = plugin.config
-        if (!config!!.contains("enable-set-home-sound") || !config!!.contains("enable-teleport-sound") || !config!!.contains("enable-set-home-message") || !config!!.contains("enable-teleport-message") || !config!!.contains("set-home-message") || !config!!.contains("teleport-message") || !config!!.contains("enable-set-home-delay") || !config!!.contains("enable-teleport-delay") || !config!!.contains("set-home-delay(s)") || !config!!.contains("teleport-delay(s)") || !config!!.contains("max-home") || !config!!.contains("move-cancel"))
+
+        if (!config!!.contains("enable-set-home-sound") || !config!!.contains("enable-teleport-sound") ||
+                !config!!.contains("enable-set-home-message") || !config!!.contains("enable-teleport-message") ||
+                !config!!.contains("set-home-message") || !config!!.contains("teleport-message") ||
+                !config!!.contains("enable-set-home-delay") || !config!!.contains("enable-teleport-delay") ||
+                !config!!.contains("set-home-delay(s)") || !config!!.contains("teleport-delay(s)") ||
+                !config!!.contains("max-home") || !config!!.contains("move-cancel"))
         {
             plugin.logger.info("config.yml にエラーが起こっています。")
         }
