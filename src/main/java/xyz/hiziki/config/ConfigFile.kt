@@ -5,34 +5,47 @@ import xyz.hiziki.Main
 
 class ConfigFile
 {
-    private val plugin : JavaPlugin? = Main.Companion.getPlugin()
-    private val config = plugin!!.config
-    val eNABLE_SET_HOME_SOUND : Boolean
+    private val plugin : JavaPlugin = Main.plugin!!
+
+    private val config = plugin.config
+    val enableSetHomeSound : Boolean
         get() = config.getBoolean("enable-set-home-sound")
-    val eNABLE_SET_HOME_MESSAGE : Boolean
+
+    val enableSetHomeMessage : Boolean
         get() = config.getBoolean("enable-set-home-message")
-    val sET_HOME_MESSAGE : String?
+
+    val setHomeMessage : String?
         get() = config.getString("set-home-message")
-    val eNABLE_SET_HOME_DELAY : Boolean
+
+    val enableSetHomeDelay : Boolean
         get() = config.getBoolean("enable-set-home-delay")
-    val sET_HOME_DELAY : Int
+
+    val setHomeDelay : Int
         get() = config.getInt("set-home-delay(s)")
-    val eNABLE_TELEPORT_SOUND : Boolean
+
+    val enableTeleportSound : Boolean
         get() = config.getBoolean("enable-teleport-sound")
-    val eNABLE_TELEPORT_MESSAGE : Boolean
+
+    val enableTeleportMessage : Boolean
         get() = config.getBoolean("enable-teleport-message")
-    val tELEPORT_MESSAGE : String?
+
+    val teleportMessage : String?
         get() = config.getString("teleport-message")
-    val eNABLE_TELEPORT_DELAY : Boolean
+
+    val enableTeleportDelay : Boolean
         get() = config.getBoolean("enable-teleport-delay")
-    val tELEPORT_DELAY : Int
+
+    val teleportDelay : Int
         get() = config.getInt("teleport-delay(s)")
-    val mAX_HOME : Int
+
+    val maxHome : Int
         get() = config.getInt("max-home")
 
-    //# --- 設定ファイル --- #
-    val mOVE_CANCEL : Boolean
+    val moveCancel : Boolean
         get() = config.getBoolean("move-cancel")
+
+
+    //# --- 設定ファイル --- #
     //
     //# --- ホームを設定した時　--- #
     //enable-set-home-sound: true
