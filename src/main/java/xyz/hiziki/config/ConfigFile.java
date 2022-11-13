@@ -32,6 +32,8 @@ public class ConfigFile
 
     public int getMAX_HOME() { return config.getInt("max-home"); }
 
+    public boolean getMOVE_CANCEL() { return config.getBoolean("move-cancel"); }
+
     //# --- 設定ファイル --- #
     //
     //# --- ホームを設定した時　--- #
@@ -50,4 +52,5 @@ public class ConfigFile
     //
     //# --- 最大ホーム数 --- #
     //max-home: 3
+    //move-cancel: true
 }

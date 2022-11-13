@@ -31,7 +31,7 @@ public class Config
                 !config.contains("set-home-message") || !config.contains("teleport-message") ||
                 !config.contains("enable-set-home-delay") || !config.contains("enable-teleport-delay") ||
                 !config.contains("set-home-delay(s)") || !config.contains("teleport-delay(s)") ||
-                !config.contains("max-home"))
+                !config.contains("max-home") || !config.contains("move-cancel"))
         {
             plugin.getLogger().info("config.yml にエラーが起こっています。");
         }
@@ -90,23 +90,29 @@ public class Config
         {
             plugin.getLogger().info("max-homeがInt形じゃありません。");
         }
+
+        if (!config.isBoolean("move-cancel"))
+        {
+            plugin.getLogger().info("move-cancelがBoolean形じゃありません。");
+        }
     }
 }
 //# --- 設定ファイル --- #
 //
-//# --- ホームを設定した時　--- #
+//# --- ホーム設定時　--- #
 //enable-set-home-sound: true
 //enable-set-home-message: true
 //set-home-message: 'ホームを設定しました。'
 //enable-set-home-delay: false
 //set-home-delay(s): 5
 //
-//# --- ホームにTPした時 ---#
+//# --- ホームにTP時 ---#
 //enable-teleport-sound: true
 //enable-teleport-message: true
 //teleport-message: 'ホームにTPしました。'
 //enable-teleport-delay: true
 //teleport-delay(s): 5
 //
-//# --- 最大ホーム数 --- #
+//# --- 共通設定 --- #
 //max-home: 3
+//move-cancel: true

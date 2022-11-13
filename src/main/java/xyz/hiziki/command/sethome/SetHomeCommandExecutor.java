@@ -81,7 +81,26 @@ public class SetHomeCommandExecutor implements CommandExecutor
             @Override
             public void run()
             {
-                if (x == p.getLocation().getX() && y == p.getLocation().getY() && z == p.getLocation().getZ())
+                if (config.getMOVE_CANCEL())
+                {
+                    if (x == p.getLocation().getX() && y == p.getLocation().getY() && z == p.getLocation().getZ())
+                    {
+                        if (count <= 0)
+                        {
+                            setHome(p, num);
+                            cancel();
+                            return;
+                        }
+                        count--;
+                        p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5F, 0.5F); //再生
+                    }
+                    else
+                    {
+                        new Prefix(p, ChatColor.RED + "移動したためホームの設定がキャンセルされました。"); //プレイヤーに送信
+                        cancel(); //スケジューラーから抜ける
+                    }
+                }
+                else
                 {
                     if (count <= 0)
                     {
@@ -91,11 +110,6 @@ public class SetHomeCommandExecutor implements CommandExecutor
                     }
                     count--;
                     p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5F, 0.5F); //再生
-                }
-                else
-                {
-                    new Prefix(p, ChatColor.RED + "移動したためホームの設定がキャンセルされました。"); //プレイヤーに送信
-                    cancel(); //スケジューラーから抜ける
                 }
             }
         }.runTaskTimer(plugin, 0, 20);
