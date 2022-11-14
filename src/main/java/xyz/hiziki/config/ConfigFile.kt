@@ -8,41 +8,30 @@ class ConfigFile
     private val plugin : JavaPlugin = Main.plugin!!
 
     private val config = plugin.config
-    val enableSetHomeSound : Boolean
-        get() = config.getBoolean("enable-set-home-sound")
 
-    val enableSetHomeMessage : Boolean
-        get() = config.getBoolean("enable-set-home-message")
+    val enableSetHomeSound = config.getBoolean("enable-set-home-sound")
 
-    val setHomeMessage : String?
-        get() = config.getString("set-home-message")
+    val enableSetHomeMessage = config.getBoolean("enable-set-home-message")
 
-    val enableSetHomeDelay : Boolean
-        get() = config.getBoolean("enable-set-home-delay")
+    val setHomeMessage = config.getString("set-home-message")
 
-    val setHomeDelay : Int
-        get() = config.getInt("set-home-delay(s)")
+    val enableSetHomeDelay = config.getBoolean("enable-set-home-delay")
 
-    val enableTeleportSound : Boolean
-        get() = config.getBoolean("enable-teleport-sound")
+    val setHomeDelay = config.getInt("set-home-delay(s)")
 
-    val enableTeleportMessage : Boolean
-        get() = config.getBoolean("enable-teleport-message")
+    val enableTeleportSound = config.getBoolean("enable-teleport-sound")
 
-    val teleportMessage : String?
-        get() = config.getString("teleport-message")
+    val enableTeleportMessage = config.getBoolean("enable-teleport-message")
 
-    val enableTeleportDelay : Boolean
-        get() = config.getBoolean("enable-teleport-delay")
+    val teleportMessage = config.getString("teleport-message")
 
-    val teleportDelay : Int
-        get() = config.getInt("teleport-delay(s)")
+    val enableTeleportDelay = config.getBoolean("enable-teleport-delay")
 
-    val maxHome : Int
-        get() = config.getInt("max-home")
+    val teleportDelay = config.getInt("teleport-delay(s)")
 
-    val moveCancel : Boolean
-        get() = config.getBoolean("move-cancel")
+    val maxHome = config.getInt("max-home")
+
+    val moveCancel = config.getBoolean("move-cancel")
 
 
     //# --- 設定ファイル --- #
