@@ -45,9 +45,11 @@ class SetHomeCommandExecutor : CommandExecutor
             else  //サブコマンドが設定されていたら
             {
                 val homeNum = args[0].toInt()
+
                 if (homeNum > config.maxHome || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    Prefix(sender, ChatColor.RED.toString() + "サブコマンドは 1~" + config.maxHome + " までしかありません。") //エラーをプレイヤーに送信
+                    Prefix(sender, ChatColor.RED.toString() + "サブコマンドは 1~" + config.maxHome
+                            + " までしかありません。") //エラーをプレイヤーに送信
                 }
                 else  //サブコマンドが設定されている数以内だったら
                 {
