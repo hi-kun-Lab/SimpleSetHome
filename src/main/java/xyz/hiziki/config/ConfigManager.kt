@@ -3,7 +3,7 @@ package xyz.hiziki.config
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.plugin.java.JavaPlugin
 
-class Config(private val plugin : JavaPlugin)
+class ConfigManager(private val plugin : JavaPlugin)
 {
     private var config : FileConfiguration? = null
 

@@ -3,7 +3,7 @@ package xyz.hiziki
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.java.JavaPlugin
 import xyz.hiziki.command.CommandManager
-import xyz.hiziki.config.Config
+import xyz.hiziki.config.ConfigManager
 import java.io.File
 
 class Main : JavaPlugin()
@@ -18,7 +18,7 @@ class Main : JavaPlugin()
         homesFile = File(dataFolder, "Homes.yml")
         homes = YamlConfiguration.loadConfiguration(homesFile!!)
 
-        Config(this)
+        ConfigManager(this)
         CommandManager(this)
 
         logger.info("プラグインは正常に起動しました。")
