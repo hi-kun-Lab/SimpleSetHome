@@ -68,7 +68,7 @@ class HomeCommandExecutor : CommandExecutor
 
     private fun teleportCountDown(p : Player, num : Int)
     {
-        var count = config.setHomeDelay
+        var count = config.teleportDelay
 
         val x = p.location.x
         val y = p.location.y
