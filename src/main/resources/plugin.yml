@@ -1,7 +1,7 @@
 name: SimpleSetHome
 version: '${project.version}'
 main: xyz.hiziki.Main
-api-version: 1.16
+api-version: 1.15
 prefix: SimpleSetHome
 authors: [ hi_kun_JPN ]
 description: プレイヤーが家を設定できます。
