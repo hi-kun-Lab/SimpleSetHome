@@ -6,7 +6,7 @@
 
     <groupId>xyz.hiziki</groupId>
     <artifactId>SimpleSetHome</artifactId>
-    <version>3.4</version>
+    <version>3.5</version>
     <packaging>jar</packaging>
 
     <name>SimpleSetHome</name>
