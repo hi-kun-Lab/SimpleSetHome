@@ -123,6 +123,7 @@ class HomeCommandExecutor : CommandExecutor
     private fun teleportHome(p : Player, num : Int)
     {
         p.teleport(homes!!.getLocation("Homes." + p.uniqueId + "." + num + ".Location")!!) // ホームにテレポート
+
         if (config.enableTeleportMessage) //設定ファイルでメッセージがtrueになっていたら
         {
             if (config.teleportMessage != null) //メッセージがあるかどうかを確認して

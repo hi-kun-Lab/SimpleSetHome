@@ -35,12 +35,9 @@ class Main : JavaPlugin()
     companion object
     {
         var plugin : JavaPlugin? = null
-            private set
 
         var homesFile : File? = null
-            private set
 
         var homes : YamlConfiguration? = null
-            private set
     }
 }
