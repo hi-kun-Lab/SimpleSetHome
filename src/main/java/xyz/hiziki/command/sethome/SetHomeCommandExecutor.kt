@@ -22,14 +22,6 @@ class SetHomeCommandExecutor : CommandExecutor
 
     private val config = ConfigFile()
 
-    private var count = 0
-
-    private var x = 0.0
-
-    private var y = 0.0
-
-    private var z = 0.0
-
     override fun onCommand(sender : CommandSender, command : Command, label : String, args : Array<String>) : Boolean
     {
         if (sender !is Player) //プレイヤーかどうかを確認 - プレイヤーじゃなかったら
@@ -69,11 +61,11 @@ class SetHomeCommandExecutor : CommandExecutor
 
     private fun setHomeCountDown(p : Player, num : Int)
     {
-        count = config.setHomeDelay
+        var count = config.setHomeDelay
 
-        x = p.location.x
-        y = p.location.y
-        z = p.location.z
+        val x = p.location.x
+        val y = p.location.y
+        val z = p.location.z
 
         object : BukkitRunnable()
         {
