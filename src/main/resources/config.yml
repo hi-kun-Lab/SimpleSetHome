@@ -1,19 +1,20 @@
-# --- 設定ファイル --- #
+# --- configuration --- #
 
-# --- ホーム設定時　--- #
+# --- set to the home　--- #
 enable-set-home-sound: true
 enable-set-home-message: true
-set-home-message: 'ホームを設定しました。'
+set-home-message: 'set the home.'
 enable-set-home-delay: false
 set-home-delay(s): 5
 
-# --- ホームにTP時 ---#
+# --- teleport to the home ---#
 enable-teleport-sound: true
 enable-teleport-message: true
-teleport-message: 'ホームにTPしました。'
+teleport-message: 'teleport to the home.'
 enable-teleport-delay: true
 teleport-delay(s): 5
 
-# --- 共通設定 --- #
+# --- generic setting --- #
+language(ja, en): en
 max-home: 3
 move-cancel: true
