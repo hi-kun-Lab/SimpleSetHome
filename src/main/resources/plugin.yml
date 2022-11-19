@@ -4,10 +4,10 @@ main: xyz.hiziki.Main
 api-version: 1.15
 prefix: SimpleSetHome
 authors: [ hi_kun_JPN ]
-description: プレイヤーが家を設定できます。
+description: player can set up home.
 website: www.hiziki.xyz
 commands:
-  sethome:
+  setHome:
     description: set your home
     usage: /<command>
   home:
