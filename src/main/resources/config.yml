@@ -2,15 +2,11 @@
 
 # --- set to the home　--- #
 enable-set-home-sound: true
-enable-set-home-message: true
-set-home-message: 'set the home.'
 enable-set-home-delay: false
 set-home-delay(s): 5
 
 # --- teleport to the home ---#
 enable-teleport-sound: true
-enable-teleport-message: true
-teleport-message: 'teleport to the home.'
 enable-teleport-delay: true
 teleport-delay(s): 5
 

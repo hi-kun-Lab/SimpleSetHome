@@ -11,46 +11,37 @@ class ConfigFile
 
     val enableSetHomeSound = config.getBoolean("enable-set-home-sound")
 
-    val enableSetHomeMessage = config.getBoolean("enable-set-home-message")
-
-    val setHomeMessage = config.getString("set-home-message")
-
     val enableSetHomeDelay = config.getBoolean("enable-set-home-delay")
 
     val setHomeDelay = config.getInt("set-home-delay(s)")
 
     val enableTeleportSound = config.getBoolean("enable-teleport-sound")
 
-    val enableTeleportMessage = config.getBoolean("enable-teleport-message")
-
-    val teleportMessage = config.getString("teleport-message")
-
     val enableTeleportDelay = config.getBoolean("enable-teleport-delay")
 
     val teleportDelay = config.getInt("teleport-delay(s)")
+
+    val language = config.getString("language(ja, en)")
 
     val maxHome = config.getInt("max-home")
 
     val moveCancel = config.getBoolean("move-cancel")
 
 
-    //# --- 設定ファイル --- #
+    //# --- configuration --- #
     //
-    //# --- ホームを設定した時　--- #
+    //# --- set to the home　--- #
     //enable-set-home-sound: true
-    //enable-set-home-message: true
-    //set-home-message: 'ホームを設定しました。'
     //enable-set-home-delay: false
     //set-home-delay(s): 5
     //
-    //# --- ホームにTPした時 ---#
+    //# --- teleport to the home ---#
     //enable-teleport-sound: true
-    //enable-teleport-message: true
-    //teleport-message: 'ホームにTPしました。'
     //enable-teleport-delay: true
     //teleport-delay(s): 5
     //
-    //# --- 最大ホーム数 --- #
+    //# --- generic setting --- #
+    //language(ja, en): en
     //max-home: 3
     //move-cancel: true
 }

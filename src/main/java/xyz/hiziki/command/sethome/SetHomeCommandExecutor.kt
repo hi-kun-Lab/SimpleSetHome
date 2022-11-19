@@ -1,6 +1,5 @@
 package xyz.hiziki.command.sethome
 
-import org.bukkit.ChatColor
 import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -11,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitRunnable
 import xyz.hiziki.Main
 import xyz.hiziki.config.ConfigFile
+import xyz.hiziki.message.MessageFile
 import xyz.hiziki.util.Prefix
 import xyz.hiziki.util.SaveFile
 
@@ -22,6 +22,8 @@ class SetHomeCommandExecutor : CommandExecutor
 
     private val config = ConfigFile()
 
+    private val message = MessageFile()
+
     override fun onCommand(sender : CommandSender, command : Command, label : String, args : Array<String>) : Boolean
     {
         if (sender !is Player) //プレイヤーかどうかを確認 - プレイヤーじゃなかったら
@@ -32,7 +34,7 @@ class SetHomeCommandExecutor : CommandExecutor
         {
             if (args.isEmpty()) //args が0だったら = サブコマンドが設定されていなかったら
             {
-                Prefix(sender, ChatColor.RED.toString() + "サブコマンドが設定されていません。") //エラーをプレイヤーに送信
+                Prefix(sender, message.emptySubCommand()) //エラーをプレイヤーに送信
             }
             else  //サブコマンドが設定されていたら
             {
@@ -40,8 +42,7 @@ class SetHomeCommandExecutor : CommandExecutor
 
                 if (homeNum > config.maxHome || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    Prefix(sender, ChatColor.RED.toString() + "サブコマンドは 1~" + config.maxHome
-                            + " までしかありません。") //エラーをプレイヤーに送信
+                    Prefix(sender, message.overSubCommandRange()) //エラーをプレイヤーに送信
                 }
                 else  //サブコマンドが設定されている数以内だったら
                 {
@@ -86,7 +87,7 @@ class SetHomeCommandExecutor : CommandExecutor
                     }
                     else
                     {
-                        Prefix(p, ChatColor.RED.toString() + "移動したためホームの設定がキャンセルされました。") //プレイヤーに送信
+                        Prefix(p, message.cancelSetHome()) //プレイヤーに送信
                         cancel() //スケジューラーから抜ける
                     }
                 }
@@ -109,13 +110,8 @@ class SetHomeCommandExecutor : CommandExecutor
     {
         homes!!["Homes." + p.uniqueId + "." + num + ".Location"] = p.location //ホームを設定
 
-        if (config.enableSetHomeMessage) //設定ファイルでメッセージがtrueになっていたら
-        {
-            if (config.setHomeMessage != null) //メッセージがあるかどうかを確認して
-            {
-                Prefix(p, ChatColor.AQUA.toString() + config.setHomeMessage) //プレイヤーに送信する
-            }
-        }
+        Prefix(p, message.setHome()) //プレイヤーに送信する
+
         if (config.enableSetHomeSound) //効果音を再生
         {
             p.playSound(p.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f) //再生
