@@ -41,7 +41,5 @@ class Main : JavaPlugin()
         var homesFile : File? = null
 
         var homes : YamlConfiguration? = null
-
-        var language : String? = null
     }
 }
