@@ -34,7 +34,7 @@ class SetHomeCommandExecutor : CommandExecutor
         {
             if (args.isEmpty()) //args が0だったら = サブコマンドが設定されていなかったら
             {
-                Prefix(sender, message.emptySubCommand()) //エラーをプレイヤーに送信
+                Prefix(sender, message.emptySubCommand) //エラーをプレイヤーに送信
             }
             else  //サブコマンドが設定されていたら
             {
@@ -42,7 +42,7 @@ class SetHomeCommandExecutor : CommandExecutor
 
                 if (homeNum > config.maxHome || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    Prefix(sender, message.overSubCommandRange()) //エラーをプレイヤーに送信
+                    Prefix(sender, message.overSubCommandRange) //エラーをプレイヤーに送信
                 }
                 else  //サブコマンドが設定されている数以内だったら
                 {
@@ -87,7 +87,7 @@ class SetHomeCommandExecutor : CommandExecutor
                     }
                     else
                     {
-                        Prefix(p, message.cancelSetHome()) //プレイヤーに送信
+                        Prefix(p, message.cancelSetHome) //プレイヤーに送信
                         cancel() //スケジューラーから抜ける
                     }
                 }
@@ -110,7 +110,7 @@ class SetHomeCommandExecutor : CommandExecutor
     {
         homes!!["Homes." + p.uniqueId + "." + num + ".Location"] = p.location //ホームを設定
 
-        Prefix(p, message.setHome()) //プレイヤーに送信する
+        Prefix(p, message.setHome) //プレイヤーに送信する
 
         if (config.enableSetHomeSound) //効果音を再生
         {

@@ -32,7 +32,7 @@ class HomeCommandExecutor : CommandExecutor
         {
             if (args.isEmpty()) //args が0だったら = サブコマンドが設定されていなかったら
             {
-                Prefix(sender, message.emptySubCommand()) //エラーをプレイヤーに送信
+                Prefix(sender, message.emptySubCommand) //エラーをプレイヤーに送信
             }
             else  //サブコマンドが設定されていたら
             {
@@ -40,7 +40,7 @@ class HomeCommandExecutor : CommandExecutor
 
                 if (homeNum > config.maxHome || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    Prefix(sender, message.emptySubCommand())
+                    Prefix(sender, message.emptySubCommand)
                 }
                 else  //サブコマンドが設定されている数以内だったら
                 {
@@ -92,7 +92,7 @@ class HomeCommandExecutor : CommandExecutor
                     }
                     else
                     {
-                        Prefix(p, message.cancelTeleport()) //プレイヤーに送信
+                        Prefix(p, message.cancelTeleport) //プレイヤーに送信
                         cancel() //スケジューラーから抜ける
                     }
                 }
@@ -115,7 +115,7 @@ class HomeCommandExecutor : CommandExecutor
     {
         p.teleport(homes!!.getLocation("Homes." + p.uniqueId + "." + num + ".Location")!!) // ホームにテレポート
 
-        Prefix(p, message.teleport()) //プレイヤーに送信する
+        Prefix(p, message.teleport) //プレイヤーに送信する
 
         if (config.enableTeleportSound) //効果音を送信
         {
