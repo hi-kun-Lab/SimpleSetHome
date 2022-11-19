@@ -9,7 +9,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.jetbrains.annotations.NotNull;
 import xyz.hiziki.simplesethome.Main;
 import xyz.hiziki.simplesethome.config.ConfigFile;
 import xyz.hiziki.simplesethome.util.Message;
@@ -35,8 +34,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
     private final Message message = new Message(); //メッセージ
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
-                             @NotNull String[] args)
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
         if (!(sender instanceof Player p)) //プレイヤーじゃなかったら
         {
