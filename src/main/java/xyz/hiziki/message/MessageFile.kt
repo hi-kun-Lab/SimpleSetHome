@@ -56,5 +56,4 @@ class MessageFile
             ChatColor.RED.toString() + "Home" + homeNum + "is not set."
         }
     }
-
 }
