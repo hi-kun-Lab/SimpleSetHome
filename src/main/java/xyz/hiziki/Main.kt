@@ -11,6 +11,7 @@ class Main : JavaPlugin()
     override fun onEnable()
     {
         //プラグインが起動する時
+
         super.onEnable()
 
         plugin = this
@@ -21,15 +22,16 @@ class Main : JavaPlugin()
         ConfigManager(this)
         CommandManager(this)
 
-        logger.info("プラグインは正常に起動しました。")
+        logger.info("plugin has been successfully startup.")
     }
 
     override fun onDisable()
     {
         //プラグインが停止する時
+
         super.onDisable()
 
-        logger.info("プラグインは正常に停止しました。")
+        logger.info("plugin has been successfully shutdown.")
     }
 
     companion object
@@ -39,5 +41,7 @@ class Main : JavaPlugin()
         var homesFile : File? = null
 
         var homes : YamlConfiguration? = null
+
+        var language : String? = null
     }
 }
