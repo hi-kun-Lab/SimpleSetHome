@@ -30,55 +30,55 @@ class ConfigManager(private val plugin : JavaPlugin)
                 !config!!.contains("set-home-delay(s)") || !config!!.contains("teleport-delay(s)") ||
                 !config!!.contains("max-home") || !config!!.contains("move-cancel"))
         {
-            plugin.logger.info("config.yml にエラーが起こっています。")
+            plugin.logger.info("Error in config.yml.")
         }
         if (!config!!.isBoolean("enable-set-home-sound"))
         {
-            plugin.logger.info("enable-set-home-soundがBoolean形じゃありません。")
+            plugin.logger.info("enable-set-home-sound is not in Boolean format.")
         }
         if (!config!!.isBoolean("enable-set-home-message"))
         {
-            plugin.logger.info("enable-set-home-messageがBoolean形じゃありません。")
+            plugin.logger.info("enable-set-home-message is not in Boolean format.")
         }
         if (!config!!.isString("set-home-message"))
         {
-            plugin.logger.info("set-home-messageがString形じゃありません。")
+            plugin.logger.info("set-home-message is not in String format.")
         }
         if (!config!!.isBoolean("enable-set-home-delay"))
         {
-            plugin.logger.info("enable-set-home-delayがBoolean形じゃありません。")
+            plugin.logger.info("enable-set-home-delay is not in Boolean format.")
         }
         if (!config!!.isInt("set-home-delay(s)"))
         {
-            plugin.logger.info("set-home-delay(s)がInt形じゃありません。")
+            plugin.logger.info("set-home-delay(s) is not in Int format.")
         }
         if (!config!!.isBoolean("enable-teleport-sound"))
         {
-            plugin.logger.info("enable-teleport-soundがBoolean形じゃありません。")
+            plugin.logger.info("enable-teleport-sound is not in Boolean format.")
         }
         if (!config!!.isBoolean("enable-teleport-message"))
         {
-            plugin.logger.info("enable-teleport-messageがBoolean形じゃありません。")
+            plugin.logger.info("enable-teleport-message is not in Boolean format.")
         }
         if (!config!!.isString("teleport-message"))
         {
-            plugin.logger.info("teleport-messageがString形じゃありません。")
+            plugin.logger.info("teleport-message is not in String format.")
         }
         if (!config!!.isBoolean("enable-teleport-delay"))
         {
-            plugin.logger.info("enable-teleport-delayがBoolean形じゃありません。")
+            plugin.logger.info("enable-teleport-delay is not in Boolean format.")
         }
         if (!config!!.isInt("teleport-delay(s)"))
         {
-            plugin.logger.info("teleport-delay(s)がInt形じゃありません。")
+            plugin.logger.info("teleport-delay(s) is not in Int format.")
         }
         if (!config!!.isInt("max-home"))
         {
-            plugin.logger.info("max-homeがInt形じゃありません。")
+            plugin.logger.info("max-home is not in Int format.")
         }
         if (!config!!.isBoolean("move-cancel"))
         {
-            plugin.logger.info("move-cancelがBoolean形じゃありません。")
+            plugin.logger.info("move-cancel is not in Boolean format.")
         }
     }
 }
