@@ -100,7 +100,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
                     }
                     else //プレイヤーがカウント中に動いたら
                     {
-                        new Prefix(p, message.get_CANCEL_TELEPORT); //プレイヤーに送信
+                        new Prefix(p, message.get_CANCEL_SET_HOME); //プレイヤーに送信
                         cancel(); //スケジューラーから抜ける
                     }
                 }
