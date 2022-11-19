@@ -40,7 +40,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
     {
         if (!(sender instanceof Player p)) //プレイヤーじゃなかったら
         {
-            sender.sendMessage("コマンドを実行できるこはプレイヤーのみです。"); //エラーを送信
+            sender.sendMessage("Only the player can execute the command."); //エラーを送信
         }
         else //プレイヤーだったら
         {
