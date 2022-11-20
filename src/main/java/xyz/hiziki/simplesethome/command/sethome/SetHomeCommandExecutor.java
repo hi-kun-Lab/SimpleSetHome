@@ -70,10 +70,12 @@ public class SetHomeCommandExecutor implements CommandExecutor
         return true; //コマンドが実行されたとして処理
     }
 
-    private int count = config.get_SET_HOME_DELAY; //カウント用変数
+    private int count; //カウント用変数
 
     private void setHomeCountDown(Player p, int num) //テレポート遅延用メソッド
     {
+        count = config.get_SET_HOME_DELAY; //代入
+
         var x = p.getLocation().getX(); //ロケーションを保存
         var y = p.getLocation().getY();
         var z = p.getLocation().getZ();
