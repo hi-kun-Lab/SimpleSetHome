@@ -1,6 +1,6 @@
 name: SimpleSetHome
 version: '${project.version}'
-main: xyz.hiziki.Main
+main: xyz.hiziki.simplesethome.Main
 api-version: 1.15
 prefix: SimpleSetHome
 authors: [ hi_kun_JPN ]
