@@ -16,7 +16,7 @@ import java.io.File;
 *
 * */
 
-public class Main extends JavaPlugin
+public final class Main extends JavaPlugin
 {
     private static JavaPlugin plugin;
 
