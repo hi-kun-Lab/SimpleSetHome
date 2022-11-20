@@ -26,39 +26,39 @@ public class ConfigManager
             !config.contains("set-home-delay(s)") || !config.contains("teleport-delay(s)") ||
             !config.contains("max-home") || !config.contains("move-cancel"))
         {
-            plugin.getLogger().info("Error in config.yml.");
+            plugin.getLogger().warning("Error in config.yml.");
         }
         if (!config.isBoolean("enable-set-home-sound"))
         {
-            plugin.getLogger().info("enable-set-home-sound is not in Boolean format.");
+            plugin.getLogger().warning("enable-set-home-sound is not in Boolean format.");
         }
         if (!config.isBoolean("enable-set-home-delay"))
         {
-            plugin.getLogger().info("enable-set-home-delay is not in Boolean format.");
+            plugin.getLogger().warning("enable-set-home-delay is not in Boolean format.");
         }
         if (!config.isInt("set-home-delay(s)"))
         {
-            plugin.getLogger().info("set-home-delay(s) is not in Int format.");
+            plugin.getLogger().warning("set-home-delay(s) is not in Int format.");
         }
         if (!config.isBoolean("enable-teleport-sound"))
         {
-            plugin.getLogger().info("enable-teleport-sound is not in Boolean format.");
+            plugin.getLogger().warning("enable-teleport-sound is not in Boolean format.");
         }
         if (!config.isBoolean("enable-teleport-delay"))
         {
-            plugin.getLogger().info("enable-teleport-delay is not in Boolean format.");
+            plugin.getLogger().warning("enable-teleport-delay is not in Boolean format.");
         }
         if (!config.isInt("teleport-delay(s)"))
         {
-            plugin.getLogger().info("teleport-delay(s) is not in Int format.");
+            plugin.getLogger().warning("teleport-delay(s) is not in Int format.");
         }
         if (!config.isInt("max-home"))
         {
-            plugin.getLogger().info("max-home is not in Int format.");
+            plugin.getLogger().warning("max-home is not in Int format.");
         }
         if (!config.isBoolean("move-cancel"))
         {
-            plugin.getLogger().info("move-cancel is not in Boolean format.");
+            plugin.getLogger().warning("move-cancel is not in Boolean format.");
         }
     }
 }
