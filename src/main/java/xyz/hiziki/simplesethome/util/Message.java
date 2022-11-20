@@ -17,11 +17,11 @@ public class Message
 {
     private final ConfigFile config = new ConfigFile();
 
-    public String get_EMPTY_SUB_COMMAND = config.get_LANGUAGE.equals("ja") ?
-            ChatColor.RED + "サブコマンドは 1~" + config.get_LANGUAGE + " までしかありません。" :
-            ChatColor.RED + "There are only 1~" + config.get_LANGUAGE + "subcommands.";
-
     public String get_OVER_SUB_COMMAND_RANGE = config.get_LANGUAGE.equals("ja") ?
+            ChatColor.RED + "サブコマンドは 1~" + config.get_MAX_HOME + " までしかありません。" :
+            ChatColor.RED + "There are only 1~" + config.get_MAX_HOME + "subcommands.";
+
+    public String get_EMPTY_SUB_COMMAND = config.get_LANGUAGE.equals("ja") ?
             ChatColor.RED + "サブコマンドが設定されていません。" :
             ChatColor.RED + "Subcommand not set." ;
     
