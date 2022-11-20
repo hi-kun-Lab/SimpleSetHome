@@ -126,7 +126,7 @@ public class HomeCommandExecutor implements CommandExecutor
 
     private void teleportHome(Player p, int num) //テレポート用メソッド
     {
-        p.teleport(homes.getLocation("homes." + p.getUniqueId() + "." + num + ".Location")); //ホームにテレポートする
+        p.teleport(homes.getLocation("Homes." + p.getUniqueId() + "." + num + ".Location")); //ホームにテレポートする
 
         new Prefix(p, message.get_TELEPORT); //プレイヤーにメッセージを送信
 
