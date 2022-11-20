@@ -1,6 +1,6 @@
 # --- configuration --- #
 
-# --- set to the home　--- #
+# --- set to the home --- #
 enable-set-home-sound: true
 enable-set-home-delay: false
 set-home-delay(s): 5
