@@ -22,8 +22,6 @@ public class ConfigManager
         plugin.reloadConfig();
 
         if (!config.contains("enable-set-home-sound") || !config.contains("enable-teleport-sound") ||
-            !config.contains("enable-set-home-message") || !config.contains("enable-teleport-message") ||
-            !config.contains("set-home-message") || !config.contains("teleport-message") ||
             !config.contains("enable-set-home-delay") || !config.contains("enable-teleport-delay") ||
             !config.contains("set-home-delay(s)") || !config.contains("teleport-delay(s)") ||
             !config.contains("max-home") || !config.contains("move-cancel"))
@@ -33,14 +31,6 @@ public class ConfigManager
         if (!config.isBoolean("enable-set-home-sound"))
         {
             plugin.getLogger().info("enable-set-home-sound is not in Boolean format.");
-        }
-        if (!config.isBoolean("enable-set-home-message"))
-        {
-            plugin.getLogger().info("enable-set-home-message is not in Boolean format.");
-        }
-        if (!config.isString("set-home-message"))
-        {
-            plugin.getLogger().info("set-home-message is not in String format.");
         }
         if (!config.isBoolean("enable-set-home-delay"))
         {
@@ -53,14 +43,6 @@ public class ConfigManager
         if (!config.isBoolean("enable-teleport-sound"))
         {
             plugin.getLogger().info("enable-teleport-sound is not in Boolean format.");
-        }
-        if (!config.isBoolean("enable-teleport-message"))
-        {
-            plugin.getLogger().info("enable-teleport-message is not in Boolean format.");
-        }
-        if (!config.isString("teleport-message"))
-        {
-            plugin.getLogger().info("teleport-message is not in String format.");
         }
         if (!config.isBoolean("enable-teleport-delay"))
         {
