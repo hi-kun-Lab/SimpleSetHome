@@ -21,60 +21,60 @@ public class ConfigManager
 
         plugin.reloadConfig();
 
-        if (config.contains("enable-set-home-sound") || config.contains("enable-teleport-sound") ||
-            config.contains("enable-set-home-message") || config.contains("enable-teleport-message") ||
-            config.contains("set-home-message") || config.contains("teleport-message") ||
-            config.contains("enable-set-home-delay") || config.contains("enable-teleport-delay") ||
-            config.contains("set-home-delay(s)") || config.contains("teleport-delay(s)") ||
-            config.contains("max-home") || config.contains("move-cancel"))
+        if (!config.contains("enable-set-home-sound") || !config.contains("enable-teleport-sound") ||
+            !config.contains("enable-set-home-message") || !config.contains("enable-teleport-message") ||
+            !config.contains("set-home-message") || !config.contains("teleport-message") ||
+            !config.contains("enable-set-home-delay") || !config.contains("enable-teleport-delay") ||
+            !config.contains("set-home-delay(s)") || !config.contains("teleport-delay(s)") ||
+            !config.contains("max-home") || !config.contains("move-cancel"))
         {
             plugin.getLogger().info("Error in config.yml.");
         }
-        if (config.isBoolean("enable-set-home-sound"))
+        if (!config.isBoolean("enable-set-home-sound"))
         {
             plugin.getLogger().info("enable-set-home-sound is not in Boolean format.");
         }
-        if (config.isBoolean("enable-set-home-message"))
+        if (!config.isBoolean("enable-set-home-message"))
         {
             plugin.getLogger().info("enable-set-home-message is not in Boolean format.");
         }
-        if (config.isString("set-home-message"))
+        if (!config.isString("set-home-message"))
         {
             plugin.getLogger().info("set-home-message is not in String format.");
         }
-        if (config.isBoolean("enable-set-home-delay"))
+        if (!config.isBoolean("enable-set-home-delay"))
         {
             plugin.getLogger().info("enable-set-home-delay is not in Boolean format.");
         }
-        if (config.isInt("set-home-delay(s)"))
+        if (!config.isInt("set-home-delay(s)"))
         {
             plugin.getLogger().info("set-home-delay(s) is not in Int format.");
         }
-        if (config.isBoolean("enable-teleport-sound"))
+        if (!config.isBoolean("enable-teleport-sound"))
         {
             plugin.getLogger().info("enable-teleport-sound is not in Boolean format.");
         }
-        if (config.isBoolean("enable-teleport-message"))
+        if (!config.isBoolean("enable-teleport-message"))
         {
             plugin.getLogger().info("enable-teleport-message is not in Boolean format.");
         }
-        if (config.isString("teleport-message"))
+        if (!config.isString("teleport-message"))
         {
             plugin.getLogger().info("teleport-message is not in String format.");
         }
-        if (config.isBoolean("enable-teleport-delay"))
+        if (!config.isBoolean("enable-teleport-delay"))
         {
             plugin.getLogger().info("enable-teleport-delay is not in Boolean format.");
         }
-        if (config.isInt("teleport-delay(s)"))
+        if (!config.isInt("teleport-delay(s)"))
         {
             plugin.getLogger().info("teleport-delay(s) is not in Int format.");
         }
-        if (config.isInt("max-home"))
+        if (!config.isInt("max-home"))
         {
             plugin.getLogger().info("max-home is not in Int format.");
         }
-        if (config.isBoolean("move-cancel"))
+        if (!config.isBoolean("move-cancel"))
         {
             plugin.getLogger().info("move-cancel is not in Boolean format.");
         }
