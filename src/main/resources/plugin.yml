@@ -8,8 +8,8 @@ description: player can set up home.
 website: www.hiziki.xyz
 commands:
   setHome:
-    description: set your home
+    description: set your home.
     usage: /<command>
   home:
-    description: warp your home
+    description: warp your home.
     usage: /<command>
