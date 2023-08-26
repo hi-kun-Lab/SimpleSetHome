@@ -11,6 +11,5 @@ enable-teleport-delay: true
 teleport-delay(s): 5
 
 # --- generic setting --- #
-language(ja, en): en
 max-home: 3
 move-cancel: true
