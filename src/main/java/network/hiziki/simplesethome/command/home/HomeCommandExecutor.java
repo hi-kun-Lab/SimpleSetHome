@@ -31,7 +31,7 @@ public class HomeCommandExecutor implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) { //プレイヤーじゃなかったら
-            sender.sendMessage("Only the player can execute the command."); //エラーを送信
+            sender.sendMessage("コマンドを実行できるのはプレイヤーのみです。"); //エラーを送信
         } else { //プレイヤーだったら
             Player p = (Player) sender;
 
