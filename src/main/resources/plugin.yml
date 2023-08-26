@@ -1,11 +1,11 @@
 name: SimpleSetHome
 version: '${project.version}'
-main: xyz.hiziki.simplesethome.Main
+main: network.hiziki.simplesethome.Main
 api-version: 1.15
 prefix: SimpleSetHome
 authors: [ hi_kun_JPN ]
 description: player can set up home.
-website: www.hiziki.xyz
+website: www.hiziki.network
 commands:
   setHome:
     description: set your home.

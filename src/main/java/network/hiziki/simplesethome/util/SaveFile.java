@@ -1,7 +1,7 @@
-package xyz.hiziki.simplesethome.util;
+package network.hiziki.simplesethome.util;
 
 import org.bukkit.configuration.file.YamlConfiguration;
-import xyz.hiziki.simplesethome.Main;
+import network.hiziki.simplesethome.Main;
 
 import java.io.File;
 import java.io.IOException;

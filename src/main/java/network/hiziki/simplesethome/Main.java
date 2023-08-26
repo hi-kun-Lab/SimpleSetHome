@@ -1,9 +1,9 @@
-package xyz.hiziki.simplesethome;
+package network.hiziki.simplesethome;
 
+import network.hiziki.simplesethome.command.CommandManager;
+import network.hiziki.simplesethome.config.ConfigManager;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.hiziki.simplesethome.command.CommandManager;
-import xyz.hiziki.simplesethome.config.ConfigManager;
 
 import java.io.File;
 

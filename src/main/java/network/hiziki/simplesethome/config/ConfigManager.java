@@ -1,4 +1,4 @@
-package xyz.hiziki.simplesethome.config;
+package network.hiziki.simplesethome.config;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;

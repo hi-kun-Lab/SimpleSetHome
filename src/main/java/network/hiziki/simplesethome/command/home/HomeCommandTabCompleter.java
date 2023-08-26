@@ -1,9 +1,9 @@
-package xyz.hiziki.simplesethome.command.home;
+package network.hiziki.simplesethome.command.home;
 
+import network.hiziki.simplesethome.config.ConfigFile;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import xyz.hiziki.simplesethome.config.ConfigFile;
 
 
 import java.util.ArrayList;

@@ -1,10 +1,10 @@
-package xyz.hiziki.simplesethome.command;
+package network.hiziki.simplesethome.command;
 
+import network.hiziki.simplesethome.command.home.HomeCommandExecutor;
+import network.hiziki.simplesethome.command.home.HomeCommandTabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.hiziki.simplesethome.command.home.HomeCommandTabCompleter;
-import xyz.hiziki.simplesethome.command.home.HomeCommandExecutor;
-import xyz.hiziki.simplesethome.command.sethome.SetHomeCommandTabCompleter;
-import xyz.hiziki.simplesethome.command.sethome.SetHomeCommandExecutor;
+import network.hiziki.simplesethome.command.sethome.SetHomeCommandTabCompleter;
+import network.hiziki.simplesethome.command.sethome.SetHomeCommandExecutor;
 
 /*
 *

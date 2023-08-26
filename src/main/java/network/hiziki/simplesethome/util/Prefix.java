@@ -1,4 +1,4 @@
-package xyz.hiziki.simplesethome.util;
+package network.hiziki.simplesethome.util;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

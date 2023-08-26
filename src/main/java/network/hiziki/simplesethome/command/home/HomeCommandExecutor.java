@@ -1,5 +1,7 @@
-package xyz.hiziki.simplesethome.command.home;
+package network.hiziki.simplesethome.command.home;
 
+import network.hiziki.simplesethome.config.ConfigFile;
+import network.hiziki.simplesethome.util.Prefix;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -9,9 +11,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.hiziki.simplesethome.Main;
-import xyz.hiziki.simplesethome.config.ConfigFile;
-import xyz.hiziki.simplesethome.util.Prefix;
+import network.hiziki.simplesethome.Main;
 
 /*
 *
