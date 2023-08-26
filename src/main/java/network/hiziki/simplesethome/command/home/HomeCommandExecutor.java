@@ -32,19 +32,21 @@ public class HomeCommandExecutor implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (!(sender instanceof Player p)) //プレイヤーじゃなかったら
+        if (!(sender instanceof Player)) //プレイヤーじゃなかったら
         {
             sender.sendMessage("Only the player can execute the command."); //エラーを送信
         }
         else //プレイヤーだったら
         {
+            Player p = (Player) sender;
+
             if (args.length == 0) //サブコマンドが設定されていなかったら
             {
                 new Prefix(p, ChatColor.RED + "サブコマンドが設定されていません。"); //プレイヤーにメッセージを送信
             }
             else //サブコマンドが設定されていたら
             {
-                var homeNum = Integer.parseInt(args[0]); //args[0]を数字に変換
+                int homeNum = Integer.parseInt(args[0]); //args[0]を数字に変換
 
                 if (homeNum > config.get_MAX_HOME || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
@@ -79,9 +81,9 @@ public class HomeCommandExecutor implements CommandExecutor
     {
         count = config.get_TELEPORT_DELAY; //代入
 
-        var x = p.getLocation().getX(); //ロケーションを保存
-        var y = p.getLocation().getY();
-        var z = p.getLocation().getZ();
+        double x = p.getLocation().getX(); //ロケーションを保存
+        double y = p.getLocation().getY();
+        double z = p.getLocation().getZ();
 
         new BukkitRunnable() //スケジューラー
         {
