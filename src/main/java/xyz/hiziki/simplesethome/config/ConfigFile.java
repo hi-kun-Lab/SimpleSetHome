@@ -31,8 +31,6 @@ public class ConfigFile
 
     public final int get_TELEPORT_DELAY = config.getInt("teleport-delay(s)");
 
-    public final String get_LANGUAGE = config.getString("language(ja, en)");
-
     public final int get_MAX_HOME = config.getInt("max-home");
 
     public final boolean get_MOVE_CANCEL = config.getBoolean("move-cancel");

@@ -11,7 +11,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import xyz.hiziki.simplesethome.Main;
 import xyz.hiziki.simplesethome.config.ConfigFile;
-import xyz.hiziki.simplesethome.util.Message;
 import xyz.hiziki.simplesethome.util.Prefix;
 import xyz.hiziki.simplesethome.util.SaveFile;
 
@@ -31,8 +30,6 @@ public class SetHomeCommandExecutor implements CommandExecutor
 
     private final ConfigFile config = new ConfigFile(); //設定
 
-    private final Message message = new Message(); //メッセージ
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -44,7 +41,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
         {
             if (args.length == 0) //サブコマンドが設定されていなかったら
             {
-                new Prefix(p, message.get_EMPTY_SUB_COMMAND); //プレイヤーにメッセージを送信
+                new Prefix(p, ChatColor.RED + "サブコマンドが設定されていません。"); //プレイヤーにメッセージを送信
             }
             else //サブコマンドが設定されていたら
             {
@@ -52,7 +49,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
 
                 if (homeNum > config.get_MAX_HOME || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    new Prefix(p, message.get_OVER_SUB_COMMAND_RANGE); //送信
+                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.get_MAX_HOME + " までしかありません。"); //送信
                 }
                 else //サブコマンドが正常な場合
                 {
@@ -100,7 +97,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
                     }
                     else //プレイヤーがカウント中に動いたら
                     {
-                        new Prefix(p, message.get_CANCEL_SET_HOME); //プレイヤーに送信
+                        new Prefix(p, ChatColor.RED + "移動したためホームの設定がキャンセルされました。"); //プレイヤーに送信
                         cancel(); //スケジューラーから抜ける
                     }
                 }
@@ -123,7 +120,7 @@ public class SetHomeCommandExecutor implements CommandExecutor
     {
         homes.set("Homes." + p.getUniqueId() + "." + num + ".Location", p.getLocation()); //ホームを設定
 
-        new Prefix(p, ChatColor.AQUA + message.get_SET_HOME); //プレイヤーに送信する
+        new Prefix(p, ChatColor.AQUA + "ホームを設定しました。"); //プレイヤーに送信する
 
         if (config.get_ENABLE_SET_HOME_SOUND) //効果音を再生
         {

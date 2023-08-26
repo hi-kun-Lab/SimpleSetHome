@@ -39,7 +39,7 @@ public final class Main extends JavaPlugin
         new ConfigManager(this);
         new CommandManager(this);
 
-        getLogger().info("plugin has been successfully startup."); //プラグイン起動時にログを表示
+        getLogger().info("プラグインは正常に起動しました。"); //プラグイン起動時にログを表示
     }
 
     @Override
@@ -49,7 +49,7 @@ public final class Main extends JavaPlugin
 
         super.onDisable(); //絶対書け
 
-        getLogger().info("plugin has been successfully shutdown."); //プラグイン停止時にログを表示
+        getLogger().info("プラグインは正常に停止しました。"); //プラグイン停止時にログを表示
     }
 
     public static JavaPlugin getPlugin() //カプセル化

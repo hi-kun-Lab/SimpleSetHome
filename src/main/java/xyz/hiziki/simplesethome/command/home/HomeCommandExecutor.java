@@ -1,5 +1,6 @@
 package xyz.hiziki.simplesethome.command.home;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,7 +11,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import xyz.hiziki.simplesethome.Main;
 import xyz.hiziki.simplesethome.config.ConfigFile;
-import xyz.hiziki.simplesethome.util.Message;
 import xyz.hiziki.simplesethome.util.Prefix;
 
 /*
@@ -29,8 +29,6 @@ public class HomeCommandExecutor implements CommandExecutor
 
     private final ConfigFile config = new ConfigFile(); //設定
 
-    private final Message message = new Message(); //メッセージ
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -42,7 +40,7 @@ public class HomeCommandExecutor implements CommandExecutor
         {
             if (args.length == 0) //サブコマンドが設定されていなかったら
             {
-                new Prefix(p, message.get_EMPTY_SUB_COMMAND); //プレイヤーにメッセージを送信
+                new Prefix(p, ChatColor.RED + "サブコマンドが設定されていません。"); //プレイヤーにメッセージを送信
             }
             else //サブコマンドが設定されていたら
             {
@@ -50,13 +48,13 @@ public class HomeCommandExecutor implements CommandExecutor
 
                 if (homeNum > config.get_MAX_HOME || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
                 {
-                    new Prefix(p, message.get_OVER_SUB_COMMAND_RANGE); //送信
+                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.get_MAX_HOME + " までしかありません。"); //送信
                 }
                 else //サブコマンドが正常な場合
                 {
                     if (homes.getString("Homes." + p.getUniqueId() + "." + homeNum) == null) //ホームがなかったら
                     {
-                        new Prefix(p, message.get_NOT_SET_HOME(homeNum)); //エラーをプレイヤーに送信
+                        new Prefix(p, ChatColor.RED + "ホーム " + homeNum + " は設定されていません。"); //エラーをプレイヤーに送信
                     }
                     else //ホームがあったら
                     {
@@ -105,7 +103,7 @@ public class HomeCommandExecutor implements CommandExecutor
                     }
                     else //プレイヤーがカウント中に動いたら
                     {
-                        new Prefix(p, message.get_CANCEL_TELEPORT); //プレイヤーに送信
+                        new Prefix(p, ChatColor.RED + "移動したためテレポートがキャンセルされました。"); //プレイヤーに送信
                         cancel(); //スケジューラーから抜ける
                     }
                 }
@@ -128,7 +126,7 @@ public class HomeCommandExecutor implements CommandExecutor
     {
         p.teleport(homes.getLocation("Homes." + p.getUniqueId() + "." + num + ".Location")); //ホームにテレポートする
 
-        new Prefix(p, message.get_TELEPORT); //プレイヤーにメッセージを送信
+        new Prefix(p, ChatColor.AQUA + "ホームにテレポートしました。"); //プレイヤーにメッセージを送信
 
         if (config.get_ENABLE_TELEPORT_SOUND) //設定されていたら
         {
