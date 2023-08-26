@@ -21,8 +21,7 @@ import network.hiziki.simplesethome.Main;
 *
 * */
 
-public class HomeCommandExecutor implements CommandExecutor
-{
+public class HomeCommandExecutor implements CommandExecutor {
     private final JavaPlugin plugin = Main.getPlugin(); //JavaPlugin
 
     private final YamlConfiguration homes = Main.getHomes(); //ホームファイル
@@ -30,42 +29,28 @@ public class HomeCommandExecutor implements CommandExecutor
     private final ConfigFile config = new ConfigFile(); //設定
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
-    {
-        if (!(sender instanceof Player)) //プレイヤーじゃなかったら
-        {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player)) { //プレイヤーじゃなかったら
             sender.sendMessage("Only the player can execute the command."); //エラーを送信
-        }
-        else //プレイヤーだったら
-        {
+        } else { //プレイヤーだったら
             Player p = (Player) sender;
 
-            if (args.length == 0) //サブコマンドが設定されていなかったら
-            {
+            if (args.length == 0) { //サブコマンドが設定されていなかったら
                 new Prefix(p, ChatColor.RED + "サブコマンドが設定されていません。"); //プレイヤーにメッセージを送信
             }
-            else //サブコマンドが設定されていたら
-            {
+            else { //サブコマンドが設定されていたら
                 int homeNum = Integer.parseInt(args[0]); //args[0]を数字に変換
 
-                if (homeNum > config.get_MAX_HOME || homeNum == 0) //サブコマンドが設定されている数を超えている or 0だったら
-                {
+                if (homeNum > config.get_MAX_HOME || homeNum == 0) { //サブコマンドが設定されている数を超えている or 0だったら
                     new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.get_MAX_HOME + " までしかありません。"); //送信
                 }
-                else //サブコマンドが正常な場合
-                {
-                    if (homes.getString("Homes." + p.getUniqueId() + "." + homeNum) == null) //ホームがなかったら
-                    {
+                else { //サブコマンドが正常な場合
+                    if (homes.getString("Homes." + p.getUniqueId() + "." + homeNum) == null) { //ホームがなかったら
                         new Prefix(p, ChatColor.RED + "ホーム " + homeNum + " は設定されていません。"); //エラーをプレイヤーに送信
-                    }
-                    else //ホームがあったら
-                    {
-                        if (config.get_ENABLE_TELEPORT_DELAY) //遅延がありだったら
-                        {
+                    } else { //ホームがあったら
+                        if (config.get_ENABLE_TELEPORT_DELAY) { //遅延がありだったら
                             teleportCountDown(p, homeNum); //teleportCountDownメソッドに転送
-                        }
-                        else //遅延がなしだったら
-                        {
+                        } else { //遅延がなしだったら
                             teleportHome(p, homeNum); //teleportHomeメソッドに転送
                         }
                     }
@@ -77,42 +62,31 @@ public class HomeCommandExecutor implements CommandExecutor
 
     private int count; //カウント用変数
 
-    private void teleportCountDown(Player p, int num) //テレポート遅延用メソッド
-    {
+    private void teleportCountDown(Player p, int num) { //テレポート遅延用メソッド
         count = config.get_TELEPORT_DELAY; //代入
 
         double x = p.getLocation().getX(); //ロケーションを保存
         double y = p.getLocation().getY();
         double z = p.getLocation().getZ();
 
-        new BukkitRunnable() //スケジューラー
-        {
+        new BukkitRunnable() { //スケジューラー
             @Override
-            public void run() //この中が回される
-            {
-                if (config.get_MOVE_CANCEL) //移動したらキャンセルされる設定になっていたら
-                {
-                    if (x == p.getLocation().getX() && y == p.getLocation().getY() && z == p.getLocation().getZ()) //比較
-                    {
-                        if (count <= 0) //カウントが0になったら
-                        {
+            public void run() { //この中が回される
+                if (config.get_MOVE_CANCEL) { //移動したらキャンセルされる設定になっていたら
+                    if (x == p.getLocation().getX() && y == p.getLocation().getY() && z == p.getLocation().getZ()) {
+                        if (count <= 0) { //カウントが0になったら
                             teleportHome(p, num); //teleportHomeメソッドに転送
                             cancel(); //スケジューラーをキャンセルする
                             return; //メソッドから抜ける
                         }
                         count--; //カウントを1引く
                         p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5f, 0.5f); //再生
-                    }
-                    else //プレイヤーがカウント中に動いたら
-                    {
+                    } else { //プレイヤーがカウント中に動いたら
                         new Prefix(p, ChatColor.RED + "移動したためテレポートがキャンセルされました。"); //プレイヤーに送信
                         cancel(); //スケジューラーから抜ける
                     }
-                }
-                else //移動してもキャンセルされない設定になっていたら
-                {
-                    if (count <= 0) //カウントが0になったら
-                    {
+                } else {  //移動してもキャンセルされない設定になっていたら
+                    if (count <= 0) { //カウントが0になったら
                         teleportHome(p, num); //teleportHomeメソッドに転送
                         cancel(); //スケジューラーをキャンセルする
                         return; //メソッドから抜ける
@@ -124,14 +98,12 @@ public class HomeCommandExecutor implements CommandExecutor
         }.runTaskTimer(plugin, 0, 20); //20Tick(20tick = 1秒) 1秒ごとに回す
     }
 
-    private void teleportHome(Player p, int num) //テレポート用メソッド
-    {
+    private void teleportHome(Player p, int num) { //テレポート用メソッド
         p.teleport(homes.getLocation("Homes." + p.getUniqueId() + "." + num + ".Location")); //ホームにテレポートする
 
         new Prefix(p, ChatColor.AQUA + "ホームにテレポートしました。"); //プレイヤーにメッセージを送信
 
-        if (config.get_ENABLE_TELEPORT_SOUND) //設定されていたら
-        {
+        if (config.get_ENABLE_TELEPORT_SOUND) { //設定されていたら
             p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1F, 1F); //再生
         }
     }

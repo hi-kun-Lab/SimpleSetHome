@@ -16,17 +16,14 @@ import java.util.List;
  *
  * */
 
-public class SetHomeCommandTabCompleter implements TabCompleter
-{
+public class SetHomeCommandTabCompleter implements TabCompleter {
     public final ConfigFile config = new ConfigFile();
 
     @Override
-    public  List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args)
-    {
+    public  List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> list = new ArrayList<>();
 
-        for (int i = 1; config.get_MAX_HOME >= i; i++)
-        {
+        for (int i = 1; config.get_MAX_HOME >= i; i++) {
             list.add(String.valueOf(i));
         }
         return list;

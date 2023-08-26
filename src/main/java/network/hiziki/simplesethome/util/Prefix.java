@@ -10,10 +10,8 @@ import org.bukkit.entity.Player;
 *
 * */
 
-public class Prefix
-{
-    public Prefix(Player p, String msg)
-    {
+public class Prefix {
+    public Prefix(Player p, String msg) {
         p.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "SimpleSetHome" + ChatColor.AQUA + "]" + msg); //送信
     }
 }

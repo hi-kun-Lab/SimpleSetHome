@@ -13,20 +13,15 @@ import java.io.IOException;
 *
 * */
 
-public class SaveFile
-{
-    public SaveFile() //yml保存
-    {
+public class SaveFile {
+    public SaveFile() { //保存
         File homesFile = Main.getHomesFile();
-
         YamlConfiguration homes = Main.getHomes();
 
-        try
-        {
+        try {
             homes.save(homesFile); //ファイルを保存
         }
-        catch(IOException ex) //IOExceptionが起こったら
-        {
+        catch(IOException ex) { //例外が発生したら
             ex.printStackTrace(); //ログに表示
         }
     }

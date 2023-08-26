@@ -13,10 +13,8 @@ import network.hiziki.simplesethome.command.sethome.SetHomeCommandExecutor;
 * コマンドを管理するクラス
 * */
 
-public class CommandManager
-{
-    public CommandManager(JavaPlugin plugin)
-    {
+public class CommandManager {
+    public CommandManager(JavaPlugin plugin) {
         plugin.getCommand("home").setExecutor(new HomeCommandExecutor());
         plugin.getCommand("home").setTabCompleter(new HomeCommandTabCompleter());
 
