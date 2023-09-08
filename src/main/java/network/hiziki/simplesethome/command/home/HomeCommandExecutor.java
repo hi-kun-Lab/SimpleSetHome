@@ -1,7 +1,7 @@
 package network.hiziki.simplesethome.command.home;
 
+import network.hiziki.simplesethome.Util;
 import network.hiziki.simplesethome.config.ConfigFile;
-import network.hiziki.simplesethome.util.Prefix;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -36,17 +36,17 @@ public class HomeCommandExecutor implements CommandExecutor {
             Player p = (Player) sender;
 
             if (args.length == 0) { //サブコマンドが設定されていなかったら
-                new Prefix(p, ChatColor.RED + "サブコマンドが設定されていません。"); //プレイヤーにメッセージを送信
+                new Util().prefix(p, ChatColor.RED + "サブコマンドが設定されていません。"); //プレイヤーにメッセージを送信
             }
             else { //サブコマンドが設定されていたら
                 int homeNum = Integer.parseInt(args[0]); //args[0]を数字に変換
 
                 if (homeNum > config.get_MAX_HOME || homeNum == 0) { //サブコマンドが設定されている数を超えている or 0だったら
-                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.get_MAX_HOME + " までしかありません。"); //送信
+                    new Util().prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.get_MAX_HOME + " までしかありません。"); //送信
                 }
                 else { //サブコマンドが正常な場合
                     if (homes.getString("Homes." + p.getUniqueId() + "." + homeNum) == null) { //ホームがなかったら
-                        new Prefix(p, ChatColor.RED + "ホーム " + homeNum + " は設定されていません。"); //エラーをプレイヤーに送信
+                        new Util().prefix(p, ChatColor.RED + "ホーム " + homeNum + " は設定されていません。"); //エラーをプレイヤーに送信
                     } else { //ホームがあったら
                         if (config.get_ENABLE_TELEPORT_DELAY) { //遅延がありだったら
                             teleportCountDown(p, homeNum); //teleportCountDownメソッドに転送
@@ -82,7 +82,7 @@ public class HomeCommandExecutor implements CommandExecutor {
                         count--; //カウントを1引く
                         p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5f, 0.5f); //再生
                     } else { //プレイヤーがカウント中に動いたら
-                        new Prefix(p, ChatColor.RED + "移動したためテレポートがキャンセルされました。"); //プレイヤーに送信
+                        new Util().prefix(p, ChatColor.RED + "移動したためテレポートがキャンセルされました。"); //プレイヤーに送信
                         cancel(); //スケジューラーから抜ける
                     }
                 } else {  //移動してもキャンセルされない設定になっていたら
@@ -101,7 +101,7 @@ public class HomeCommandExecutor implements CommandExecutor {
     private void teleportHome(Player p, int num) { //テレポート用メソッド
         p.teleport(homes.getLocation("Homes." + p.getUniqueId() + "." + num + ".Location")); //ホームにテレポートする
 
-        new Prefix(p, ChatColor.AQUA + "ホームにテレポートしました。"); //プレイヤーにメッセージを送信
+        new Util().prefix(p, ChatColor.AQUA + "ホームにテレポートしました。"); //プレイヤーにメッセージを送信
 
         if (config.get_ENABLE_TELEPORT_SOUND) { //設定されていたら
             p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1F, 1F); //再生

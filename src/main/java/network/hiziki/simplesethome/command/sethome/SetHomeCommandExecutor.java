@@ -1,9 +1,8 @@
 package network.hiziki.simplesethome.command.sethome;
 
 import network.hiziki.simplesethome.Main;
+import network.hiziki.simplesethome.Util;
 import network.hiziki.simplesethome.config.ConfigFile;
-import network.hiziki.simplesethome.util.Prefix;
-import network.hiziki.simplesethome.util.SaveFile;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -37,12 +36,12 @@ public class SetHomeCommandExecutor implements CommandExecutor {
             Player p = (Player) sender;
 
             if (args.length == 0) { //サブコマンドが設定されていなかったら
-                new Prefix(p, ChatColor.RED + "サブコマンドが設定されていません。"); //プレイヤーにメッセージを送信
+                new Util().prefix(p, ChatColor.RED + "サブコマンドが設定されていません。"); //プレイヤーにメッセージを送信
             } else { //サブコマンドが設定されていたら
                 int homeNum = Integer.parseInt(args[0]); //args[0]を数字に変換
 
                 if (homeNum > config.get_MAX_HOME || homeNum == 0) { //サブコマンドが設定されている数を超えている or 0だったら
-                    new Prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.get_MAX_HOME + " までしかありません。"); //送信
+                    new Util().prefix(p, ChatColor.RED + "サブコマンドは 1~" + config.get_MAX_HOME + " までしかありません。"); //送信
                 } else { //サブコマンドが正常な数の場合
                     if (config.get_ENABLE_SET_HOME_DELAY) { //遅延がありだったら
                         setHomeCountDown(p, homeNum); //setHomeCountDownメソッドに転送
@@ -77,7 +76,7 @@ public class SetHomeCommandExecutor implements CommandExecutor {
                         count--; //カウントを1引く
                         p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.5f, 0.5f); //再生
                     } else { //プレイヤーがカウント中に動いたら
-                        new Prefix(p, ChatColor.RED + "移動したためホームの設定がキャンセルされました。"); //プレイヤーに送信
+                        new Util().prefix(p, ChatColor.RED + "移動したためホームの設定がキャンセルされました。"); //プレイヤーに送信
                         cancel(); //スケジューラーから抜ける
                     }
                 } else { //移動してもキャンセルされない設定になっていたら
@@ -96,11 +95,11 @@ public class SetHomeCommandExecutor implements CommandExecutor {
     private void setHome(Player p, int num) { //ホーム設定メソッド
         homes.set("Homes." + p.getUniqueId() + "." + num + ".Location", p.getLocation()); //ホームを設定
 
-        new Prefix(p, ChatColor.AQUA + "ホームを設定しました。"); //プレイヤーに送信する
+        new Util().prefix(p, ChatColor.AQUA + "ホームを設定しました。"); //プレイヤーに送信する
 
         if (config.get_ENABLE_SET_HOME_SOUND) { //効果音を再生
             p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1); //再生
         }
-        new SaveFile(); //設定したファイルを保存
+        new Util().saveFile(); //設定したファイルを保存
     }
 }
